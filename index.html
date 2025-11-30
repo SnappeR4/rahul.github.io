@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rahul Waghmare | Full-Stack Product Engineer</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <style>
+        /* Custom Styles for Subtle Animations */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0d1117; /* GitHub Dark Theme Background */
+            color: #c9d1d9; /* Light gray text */
+        }
+        .container {
+            max-width: 1280px;
+        }
+        .card-project {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card-project:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 25px rgba(0, 255, 179, 0.15); /* Subtle turquoise glow */
+        }
+        /* Scroll Reveal Effect Class */
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .scroll-reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header / Navigation (Simple) -->
+    <header class="sticky top-0 z-50 bg-black/80 backdrop-blur-sm shadow-lg">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="#hero" class="text-2xl font-extrabold text-[#00ffb3] tracking-wider">
+                R W
+            </a>
+            <nav class="hidden md:flex space-x-8 text-sm font-medium">
+                <a href="#about" class="hover:text-[#00ffb3] transition duration-200">About</a>
+                <a href="#projects" class="hover:text-[#00ffb3] transition duration-200">Projects</a>
+                <a href="#skills" class="hover:text-[#00ffb3] transition duration-200">Skills</a>
+                <a href="#contact" class="hover:text-[#00ffb3] transition duration-200">Contact</a>
+            </nav>
+            <a href="#" class="md:block hidden bg-[#00ffb3] text-gray-900 px-4 py-2 text-sm font-semibold rounded-lg hover:bg-white transition duration-300 shadow-md">
+                Download Resume
+            </a>
+        </div>
+    </header>
+
+    <main class="pt-16">
+
+        <!-- 1. HERO SECTION -->
+        <section id="hero" class="container mx-auto px-6 py-20 md:py-32 flex flex-col md:flex-row items-center justify-between min-h-[80vh] scroll-reveal">
+            <div class="md:w-3/5 space-y-6 text-center md:text-left">
+                <p class="text-lg text-[#00ffb3] font-medium uppercase tracking-widest">
+                    Rahul Waghmare | Full-Stack Product Engineer
+                </p>
+                <h1 class="text-5xl md:text-7xl font-extrabold leading-tight text-white">
+                    I build, launch, <br> and manage <span class="text-[#00ffb3]">high-performance</span> applications.
+                </h1>
+                <p class="text-xl text-gray-400 max-w-xl pt-4">
+                    Expert in the entire product lifecycle, from UI/UX design and API creation (Node.js) to native app development (Flutter/Android) and cloud deployment.
+                </p>
+                <div class="pt-8 flex justify-center md:justify-start space-x-4">
+                    <a href="#projects" class="bg-[#00ffb3] text-gray-900 px-6 py-3 font-bold rounded-xl hover:bg-white transition duration-300 shadow-lg transform hover:scale-[1.02]">
+                        View My Work
+                    </a>
+                    <a href="#contact" class="border border-gray-600 text-white px-6 py-3 font-semibold rounded-xl hover:bg-gray-700 transition duration-300">
+                        Let's Talk
+                    </a>
+                </div>
+            </div>
+
+            <!-- Headshot Placeholder (Replace with actual image URL) -->
+            <div class="md:w-1/4 mt-12 md:mt-0 flex justify-center scroll-reveal delay-300">
+                <div class="w-64 h-64 bg-gray-800 rounded-full flex items-center justify-center border-4 border-[#00ffb3]/50 shadow-2xl shadow-[#00ffb3]/20 overflow-hidden">
+                    <img src="https://placehold.co/256x256/2d3748/ffffff?text=Professional%20Headshot" 
+                         alt="Rahul Waghmare Headshot" 
+                         class="w-full h-full object-cover" 
+                         onerror="this.src='https://placehold.co/256x256/2d3748/ffffff?text=Photo';">
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. CORE COMPETENCY / ABOUT ME -->
+        <section id="about" class="container mx-auto px-6 py-20 md:py-24 scroll-reveal">
+            <h2 class="text-3xl md:text-4xl font-bold mb-10 text-center text-white">
+                The <span class="text-[#00ffb3]">One-Man Army</span> Value Proposition
+            </h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Competency Card 1 -->
+                <div class="bg-gray-800 p-8 rounded-xl shadow-xl border border-gray-700 hover:border-[#00ffb3] transition card-project">
+                    <h3 class="text-xl font-semibold text-[#00ffb3] mb-3">01. Full-Stack Product Ownership</h3>
+                    <p class="text-gray-400">
+                        I am the sole developer responsible for delivering mission-critical systems—from initial concept and database design (Mongo Atlas) to production deployment and maintenance.
+                    </p>
+                </div>
+                <!-- Competency Card 2 -->
+                <div class="bg-gray-800 p-8 rounded-xl shadow-xl border border-gray-700 hover:border-[#00ffb3] transition card-project">
+                    <h3 class="text-xl font-semibold text-[#00ffb3] mb-3">02. Cross-Platform App Expertise</h3>
+                    <p class="text-gray-400">
+                        Specializing in Flutter (Dart) for responsive, cross-platform apps (AOS, POS, Mobile) while also maintaining legacy Android (Java/Kotlin) and learning Swift/Objective C.
+                    </p>
+                </div>
+                <!-- Competency Card 3 -->
+                <div class="bg-gray-800 p-8 rounded-xl shadow-xl border border-gray-700 hover:border-[#00ffb3] transition card-project">
+                    <h3 class="text-xl font-semibold text-[#00ffb3] mb-3">03. Deployment & DevOps Readiness</h3>
+                    <p class="text-gray-400">
+                        Deep experience with API hosting on Render, and managing the entire distribution lifecycle on the Google Play Store and Apple App Store, ensuring reliability.
+                    </p>
+                </div>
+            </div>
+
+            <div class="mt-16 text-center">
+                <a href="#" class="text-sm font-semibold text-white border-b border-white hover:text-[#00ffb3] hover:border-[#00ffb3] transition duration-300">
+                    Read the Full Professional Journey →
+                </a>
+            </div>
+        </section>
+
+
+        <!-- 3. KEY PROJECTS (Case Studies) -->
+        <section id="projects" class="container mx-auto px-6 py-20 md:py-24 scroll-reveal">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4 text-white text-center">
+                Featured <span class="text-[#00ffb3]">Ecosystems</span>
+            </h2>
+            <p class="text-xl text-gray-400 text-center mb-16">
+                Three projects demonstrating full-stack ownership and commercial impact.
+            </p>
+
+            <div class="grid md:grid-cols-3 gap-8">
+
+                <!-- Project Card 1: Sales Management -->
+                <div class="card-project bg-gray-900 rounded-xl p-6 border border-gray-700 shadow-2xl">
+                    <div class="text-4xl mb-4 text-[#00ffb3]">📊</div>
+                    <h3 class="text-2xl font-bold text-white mb-3">Sales Management Platform</h3>
+                    <p class="text-gray-400 mb-4 text-sm">
+                        A complete internal ecosystem managing the order-to-delivery lifecycle for a large company.
+                    </p>
+                    <ul class="text-gray-400 space-y-2 text-sm">
+                        <li class="flex items-start"><span class="text-[#00ffb3] mr-2">✓</span> **Scope:** Order entry (Sales), Payment verification (Accounts), Dispatching (COD/Prepaid), Stock management (Stock Manager).</li>
+                        <li class="flex items-start"><span class="text-[#00ffb3] mr-2">✓</span> **Integration:** Managed multiple courier services (ShipRocket, BlueDart) for streamlined logistics.</li>
+                        <li class="flex items-start"><span class="text-[#00ffb3] mr-2">✓</span> **Tech Stack:** Node.js/Express.js (Backend), Flutter (Dialer App), MongoDB Atlas.</li>
+                    </ul>
+                </div>
+
+                <!-- Project Card 2: Parking App -->
+                <div class="card-project bg-gray-900 rounded-xl p-6 border border-gray-700 shadow-2xl">
+                    <div class="text-4xl mb-4 text-[#00ffb3]">🅿️</div>
+                    <h3 class="text-2xl font-bold text-white mb-3">Smart Parking Management System</h3>
+                    <p class="text-gray-400 mb-4 text-sm">
+                        A full-stack solution for managing both fixed and dynamic (hourly) parking sites and user access.
+                    </p>
+                    <ul class="text-gray-400 space-y-2 text-sm">
+                        <li class="flex items-start"><span class="text-[#00ffb3] mr-2">✓</span> **Functionality:** Real-time parking price calculation, site allocation, and tracking.</li>
+                        <li class="flex items-start"><span class="text-[#00ffb3] mr-2">✓</span> **Users:** Separate web portals for Parking Owners, Dealers (managing multiple owners), and central Admin.</li>
+                        <li class="flex items-start"><span class="text-[#00ffb3] mr-2">✓</span> **Tech Stack:** Flutter (User App), Node.js/Express.js (API), EJS/Bootstrap (Web Portals).</li>
+                    </ul>
+                </div>
+
+                <!-- Project Card 3: GETSETPRINT Billing App -->
+                <div class="card-project bg-gray-900 rounded-xl p-6 border border-gray-700 shadow-2xl">
+                    <div class="text-4xl mb-4 text-[#00ffb3]">💳</div>
+                    <h3 class="text-2xl font-bold text-white mb-3">GETSETPRINT Retail Billing</h3>
+                    <p class="text-gray-400 mb-4 text-sm">
+                        A commercial retail billing app fully responsive for various Android POS/AOS hardware devices.
+                    </p>
+                    <ul class="text-gray-400 space-y-2 text-sm">
+                        <li class="flex items-start"><span class="text-[#00ffb3] mr-2">✓</span> **Features:** Inventory/Stock management, Profit/Loss reports, Customer balance, PDF report generation.</li>
+                        <li class="flex items-start"><span class="text-[#00ffb3] mr-2">✓</span> **Integration:** Successful integration of New Printer SR20 SDK and thermal/A4 printing capabilities.</li>
+                        <li class="flex items-start"><span class="text-[#00ffb3] mr-2">✓</span> **Web Portal:** Developed Admin Website for user/subscription management and cloud product sync.</li>
+                    </ul>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 4. SKILLS GRID -->
+        <section id="skills" class="container mx-auto px-6 py-20 md:py-24 scroll-reveal">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4 text-white text-center">
+                My <span class="text-[#00ffb3]">Technical Stack</span>
+            </h2>
+            <p class="text-xl text-gray-400 text-center mb-12">
+                Proficient across the full technology spectrum, enabling true product ownership.
+            </p>
+        
+            <div class="max-w-4xl mx-auto bg-gray-800 p-8 rounded-xl shadow-2xl border border-gray-700">
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 text-center">
+                    
+                    <!-- Skill Item: Flutter -->
+                    <div class="p-3 bg-gray-700 rounded-lg hover:bg-[#00ffb3]/20 transition transform hover:scale-105">
+                        <p class="text-white font-bold">Flutter (Dart)</p>
+                        <p class="text-sm text-[#00ffb3]">Mobile Expert</p>
+                    </div>
+                    
+                    <!-- Skill Item: Node.js -->
+                    <div class="p-3 bg-gray-700 rounded-lg hover:bg-[#00ffb3]/20 transition transform hover:scale-105">
+                        <p class="text-white font-bold">Node.js / Express.js</p>
+                        <p class="text-sm text-[#00ffb3]">Backend API</p>
+                    </div>
+        
+                    <!-- Skill Item: UI/UX -->
+                    <div class="p-3 bg-gray-700 rounded-lg hover:bg-[#00ffb3]/20 transition transform hover:scale-105">
+                        <p class="text-white font-bold">UI/UX Design</p>
+                        <p class="text-sm text-[#00ffb3]">Figma / Prototyping</p>
+                    </div>
+                    
+                    <!-- Skill Item: Hosting -->
+                    <div class="p-3 bg-gray-700 rounded-lg hover:bg-[#00ffb3]/20 transition transform hover:scale-105">
+                        <p class="text-white font-bold">Render / Cloud</p>
+                        <p class="text-sm text-[#00ffb3]">DevOps & Hosting</p>
+                    </div>
+        
+                    <!-- Skill Item: Android -->
+                    <div class="p-3 bg-gray-700 rounded-lg hover:bg-[#00ffb3]/20 transition transform hover:scale-105">
+                        <p class="text-white font-bold">Java / Kotlin</p>
+                        <p class="text-sm text-[#00ffb3]">Android Native</p>
+                    </div>
+        
+                    <!-- Skill Item: Frontend -->
+                    <div class="p-3 bg-gray-700 rounded-lg hover:bg-[#00ffb3]/20 transition transform hover:scale-105">
+                        <p class="text-white font-bold">HTML / CSS / JS</p>
+                        <p class="text-sm text-[#00ffb3]">Bootstrap / EJS</p>
+                    </div>
+        
+                    <!-- Skill Item: Databases -->
+                    <div class="p-3 bg-gray-700 rounded-lg hover:bg-[#00ffb3]/20 transition transform hover:scale-105">
+                        <p class="text-white font-bold">Mongo Atlas / Firebase</p>
+                        <p class="text-sm text-[#00ffb3]">Database Mgmt</p>
+                    </div>
+                    
+                    <!-- Skill Item: Next.js -->
+                    <div class="p-3 bg-gray-700 rounded-lg hover:bg-[#00ffb3]/20 transition transform hover:scale-105">
+                        <p class="text-white font-bold">Next.js</p>
+                        <p class="text-sm text-[#00ffb3]">Learning/New Tech</p>
+                    </div>
+        
+                </div>
+            </div>
+        </section>
+        
+        <!-- NEW: SKILLS ICONS GRID -->
+        <section id="skills-icons" class="container mx-auto px-6 py-12 md:py-16 scroll-reveal">
+            <h2 class="text-2xl md:text-3xl font-bold mb-8 text-white text-center">
+                Technologies & Tools I Work With
+            </h2>
+            
+            <div class="max-w-6xl mx-auto bg-gray-800 p-8 rounded-xl shadow-2xl border border-gray-700">
+                <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-6 text-center">
+                    
+                    <!-- Android -->
+                    <div class="p-4 bg-gray-700 rounded-lg hover:bg-[#00ffb3]/20 transition transform hover:scale-105 flex flex-col items-center">
+                        <img src="https://icon.icepanel.io/Technology/svg/Android.svg" alt="Android" class="w-12 h-12 mb-2">
+                        <p class="text-white text-sm font-medium">Android</p>
+                    </div>
+                    
+                    <!-- Android Studio -->
+                    <div class="p-4 bg-gray-700 rounded-lg hover:bg-[#00ffb3]/20 transition transform hover:scale-105 flex flex-col items-center">
+                        <img src="https://icon.icepanel.io/Technology/svg/Android-Studio.svg" alt="Android Studio" class="w-12 h-12 mb-2">
+                        <p class="text-white text-sm font-medium">Android Studio</p>
+                    </div>
+                    
+                    <!-- Dart -->
+                    <div class="p-4 bg-gray-700 rounded-lg hover:bg-[#00ffb3]/20 transition transform hover:scale-105 flex flex-col items-center">
+                        <img src="https://icon.icepanel.io/Technology/svg/Dart.svg" alt="Dart" class="w-12 h-12 mb-2">
+                        <p class="text-white text-sm font-medium">Dart</p>
+                    </div>
+                    
+                    <!-- Flutter -->
+                    <div class="p-4 bg-gray-700 rounded-lg hover:bg-[#00ffb3]/20 transition transform hover:scale-105 flex flex-col items-center">
+                        <img src="https://icon.icepanel.io/Technology/svg/Flutter.svg" alt="Flutter" class="w-12 h-12 mb-2">
+                        <p class="text-white text-sm font-medium">Flutter</p>
+                    </div>
+                    
+                    <!-- Node.js -->
+                    <div class="p-4 bg-gray-700 rounded-lg hover:bg-[#00ffb3]/20 transition transform hover:scale-105 flex flex-col items-center">
+                        <img src="https://icon.icepanel.io/Technology/svg/Node.js.svg" alt="Node.js" class="w-12 h-12 mb-2">
+                        <p class="text-white text-sm font-medium">Node.js</p>
+                    </div>
+                    
+                    <!-- Express -->
+                    <div class="p-4 bg-gray-700 rounded-lg hover:bg-[#00ffb3]/20 transition transform hover:scale-105 flex flex-col items-center">
+                        <img src="https://icon.icepanel.io/Technology/svg/Express.svg" alt="Express" class="w-12 h-12 mb-2">
+                        <p class="text-white text-sm font-medium">Express</p>
+                    </div>
+                    
+                    <!-- MongoDB -->
+                    <div class="p-4 bg-gray-700 rounded-lg hover:bg-[#00ffb3]/20 transition transform hover:scale-105 flex flex-col items-center">
+                        <img src="https://icon.icepanel.io/Technology/svg/MongoDB.svg" alt="MongoDB" class="w-12 h-12 mb-2">
+                        <p class="text-white text-sm font-medium">MongoDB</p>
+                    </div>
+                    
+                    <!-- JavaScript -->
+                    <div class="p-4 bg-gray-700 rounded-lg hover:bg-[#00ffb3]/20 transition transform hover:scale-105 flex flex-col items-center">
+                        <img src="https://icon.icepanel.io/Technology/svg/JavaScript.svg" alt="JavaScript" class="w-12 h-12 mb-2">
+                        <p class="text-white text-sm font-medium">JavaScript</p>
+                    </div>
+                    
+                    <!-- TypeScript -->
+                    <div class="p-4 bg-gray-700 rounded-lg hover:bg-[#00ffb3]/20 transition transform hover:scale-105 flex flex-col items-center">
+                        <img src="https://icon.icepanel.io/Technology/svg/TypeScript.svg" alt="TypeScript" class="w-12 h-12 mb-2">
+                        <p class="text-white text-sm font-medium">TypeScript</p>
+                    </div>
+                    
+                    <!-- HTML5 -->
+                    <div class="p-4 bg-gray-700 rounded-lg hover:bg-[#00ffb3]/20 transition transform hover:scale-105 flex flex-col items-center">
+                        <img src="https://icon.icepanel.io/Technology/svg/HTML5.svg" alt="HTML5" class="w-12 h-12 mb-2">
+                        <p class="text-white text-sm font-medium">HTML5</p>
+                    </div>
+                    
+                    <!-- CSS3 -->
+                    <div class="p-4 bg-gray-700 rounded-lg hover:bg-[#00ffb3]/20 transition transform hover:scale-105 flex flex-col items-center">
+                        <img src="https://icon.icepanel.io/Technology/svg/CSS3.svg" alt="CSS3" class="w-12 h-12 mb-2">
+                        <p class="text-white text-sm font-medium">CSS3</p>
+                    </div>
+                    
+                    <!-- Java -->
+                    <div class="p-4 bg-gray-700 rounded-lg hover:bg-[#00ffb3]/20 transition transform hover:scale-105 flex flex-col items-center">
+                        <img src="https://icon.icepanel.io/Technology/svg/Java.svg" alt="Java" class="w-12 h-12 mb-2">
+                        <p class="text-white text-sm font-medium">Java</p>
+                    </div>
+                    
+                    <!-- Kotlin -->
+                    <div class="p-4 bg-gray-700 rounded-lg hover:bg-[#00ffb3]/20 transition transform hover:scale-105 flex flex-col items-center">
+                        <img src="https://icon.icepanel.io/Technology/svg/Kotlin.svg" alt="Kotlin" class="w-12 h-12 mb-2">
+                        <p class="text-white text-sm font-medium">Kotlin</p>
+                    </div>
+                    
+                    <!-- Next.js -->
+                    <div class="p-4 bg-gray-700 rounded-lg hover:bg-[#00ffb3]/20 transition transform hover:scale-105 flex flex-col items-center">
+                        <img src="https://icon.icepanel.io/Technology/svg/Next.js.svg" alt="Next.js" class="w-12 h-12 mb-2">
+                        <p class="text-white text-sm font-medium">Next.js</p>
+                    </div>
+                    
+                    <!-- React -->
+                    <div class="p-4 bg-gray-700 rounded-lg hover:bg-[#00ffb3]/20 transition transform hover:scale-105 flex flex-col items-center">
+                        <img src="https://icon.icepanel.io/Technology/svg/React.svg" alt="React" class="w-12 h-12 mb-2">
+                        <p class="text-white text-sm font-medium">React</p>
+                    </div>
+                    
+                    <!-- Git -->
+                    <div class="p-4 bg-gray-700 rounded-lg hover:bg-[#00ffb3]/20 transition transform hover:scale-105 flex flex-col items-center">
+                        <img src="https://icon.icepanel.io/Technology/svg/Git.svg" alt="Git" class="w-12 h-12 mb-2">
+                        <p class="text-white text-sm font-medium">Git</p>
+                    </div>
+                    
+                    <!-- GitHub -->
+                    <div class="p-4 bg-gray-700 rounded-lg hover:bg-[#00ffb3]/20 transition transform hover:scale-105 flex flex-col items-center">
+                        <img src="https://icon.icepanel.io/Technology/svg/GitHub.svg" alt="GitHub" class="w-12 h-12 mb-2">
+                        <p class="text-white text-sm font-medium">GitHub</p>
+                    </div>
+                    
+                    <!-- Figma -->
+                    <div class="p-4 bg-gray-700 rounded-lg hover:bg-[#00ffb3]/20 transition transform hover:scale-105 flex flex-col items-center">
+                        <img src="https://icon.icepanel.io/Technology/svg/Figma.svg" alt="Figma" class="w-12 h-12 mb-2">
+                        <p class="text-white text-sm font-medium">Figma</p>
+                    </div>
+                    
+                    <!-- VS Code -->
+                    <div class="p-4 bg-gray-700 rounded-lg hover:bg-[#00ffb3]/20 transition transform hover:scale-105 flex flex-col items-center">
+                        <img src="https://icon.icepanel.io/Technology/svg/Visual-Studio-Code-%28VS-Code%29.svg" alt="VS Code" class="w-12 h-12 mb-2">
+                        <p class="text-white text-sm font-medium">VS Code</p>
+                    </div>
+                    
+                    <!-- Postman -->
+                    <div class="p-4 bg-gray-700 rounded-lg hover:bg-[#00ffb3]/20 transition transform hover:scale-105 flex flex-col items-center">
+                        <img src="https://icon.icepanel.io/Technology/svg/Postman.svg" alt="Postman" class="w-12 h-12 mb-2">
+                        <p class="text-white text-sm font-medium">Postman</p>
+                    </div>
+                    
+                    <!-- MySQL -->
+                    <div class="p-4 bg-gray-700 rounded-lg hover:bg-[#00ffb3]/20 transition transform hover:scale-105 flex flex-col items-center">
+                        <img src="https://icon.icepanel.io/Technology/svg/MySQL.svg" alt="MySQL" class="w-12 h-12 mb-2">
+                        <p class="text-white text-sm font-medium">MySQL</p>
+                    </div>
+                    
+                    <!-- SQLite -->
+                    <div class="p-4 bg-gray-700 rounded-lg hover:bg-[#00ffb3]/20 transition transform hover:scale-105 flex flex-col items-center">
+                        <img src="https://icon.icepanel.io/Technology/svg/SQLite.svg" alt="SQLite" class="w-12 h-12 mb-2">
+                        <p class="text-white text-sm font-medium">SQLite</p>
+                    </div>
+                    
+                    <!-- NPM -->
+                    <div class="p-4 bg-gray-700 rounded-lg hover:bg-[#00ffb3]/20 transition transform hover:scale-105 flex flex-col items-center">
+                        <img src="https://icon.icepanel.io/Technology/svg/NPM.svg" alt="NPM" class="w-12 h-12 mb-2">
+                        <p class="text-white text-sm font-medium">NPM</p>
+                    </div>
+                    
+                    <!-- Linux -->
+                    <div class="p-4 bg-gray-700 rounded-lg hover:bg-[#00ffb3]/20 transition transform hover:scale-105 flex flex-col items-center">
+                        <img src="https://icon.icepanel.io/Technology/svg/Linux.svg" alt="Linux" class="w-12 h-12 mb-2">
+                        <p class="text-white text-sm font-medium">Linux</p>
+                    </div>
+                    
+                    <!-- Jira -->
+                    <div class="p-4 bg-gray-700 rounded-lg hover:bg-[#00ffb3]/20 transition transform hover:scale-105 flex flex-col items-center">
+                        <img src="https://icon.icepanel.io/Technology/svg/Jira.svg" alt="Jira" class="w-12 h-12 mb-2">
+                        <p class="text-white text-sm font-medium">Jira</p>
+                    </div>
+                    
+                    <!-- Swift -->
+                    <div class="p-4 bg-gray-700 rounded-lg hover:bg-[#00ffb3]/20 transition transform hover:scale-105 flex flex-col items-center">
+                        <img src="https://icon.icepanel.io/Technology/svg/Swift.svg" alt="Swift" class="w-12 h-12 mb-2">
+                        <p class="text-white text-sm font-medium">Swift</p>
+                    </div>
+                    
+                    <!-- Objective-C -->
+                    <div class="p-4 bg-gray-700 rounded-lg hover:bg-[#00ffb3]/20 transition transform hover:scale-105 flex flex-col items-center">
+                        <img src="https://icon.icepanel.io/Technology/svg/Objective-C.svg" alt="Objective-C" class="w-12 h-12 mb-2">
+                        <p class="text-white text-sm font-medium">Objective-C</p>
+                    </div>
+                    
+                    <!-- Xcode -->
+                    <div class="p-4 bg-gray-700 rounded-lg hover:bg-[#00ffb3]/20 transition transform hover:scale-105 flex flex-col items-center">
+                        <img src="https://icon.icepanel.io/Technology/svg/Xcode.svg" alt="Xcode" class="w-12 h-12 mb-2">
+                        <p class="text-white text-sm font-medium">Xcode</p>
+                    </div>
+                    
+                    <!-- Apple -->
+                    <div class="p-4 bg-gray-700 rounded-lg hover:bg-[#00ffb3]/20 transition transform hover:scale-105 flex flex-col items-center">
+                        <img src="https://icon.icepanel.io/Technology/svg/Apple.svg" alt="Apple" class="w-12 h-12 mb-2">
+                        <p class="text-white text-sm font-medium">Apple</p>
+                    </div>
+                    
+                    <!-- Google -->
+                    <div class="p-4 bg-gray-700 rounded-lg hover:bg-[#00ffb3]/20 transition transform hover:scale-105 flex flex-col items-center">
+                        <img src="https://icon.icepanel.io/Technology/svg/Google.svg" alt="Google" class="w-12 h-12 mb-2">
+                        <p class="text-white text-sm font-medium">Google</p>
+                    </div>
+                    
+                    <!-- C++ -->
+                    <div class="p-4 bg-gray-700 rounded-lg hover:bg-[#00ffb3]/20 transition transform hover:scale-105 flex flex-col items-center">
+                        <img src="https://icon.icepanel.io/Technology/svg/C%2B%2B-%28CPlusPlus%29.svg" alt="C++" class="w-12 h-12 mb-2">
+                        <p class="text-white text-sm font-medium">C++</p>
+                    </div>
+                    
+                    <!-- PHP -->
+                    <div class="p-4 bg-gray-700 rounded-lg hover:bg-[#00ffb3]/20 transition transform hover:scale-105 flex flex-col items-center">
+                        <img src="https://icon.icepanel.io/Technology/svg/PHP.svg" alt="PHP" class="w-12 h-12 mb-2">
+                        <p class="text-white text-sm font-medium">PHP</p>
+                    </div>
+                    
+                    <!-- JSON -->
+                    <div class="p-4 bg-gray-700 rounded-lg hover:bg-[#00ffb3]/20 transition transform hover:scale-105 flex flex-col items-center">
+                        <img src="https://icon.icepanel.io/Technology/svg/JSON.svg" alt="JSON" class="w-12 h-12 mb-2">
+                        <p class="text-white text-sm font-medium">JSON</p>
+                    </div>
+                    
+                    <!-- Gradle -->
+                    <div class="p-4 bg-gray-700 rounded-lg hover:bg-[#00ffb3]/20 transition transform hover:scale-105 flex flex-col items-center">
+                        <img src="https://icon.icepanel.io/Technology/svg/Gradle.svg" alt="Gradle" class="w-12 h-12 mb-2">
+                        <p class="text-white text-sm font-medium">Gradle</p>
+                    </div>
+                    
+                    <!-- Qt Framework -->
+                    <div class="p-4 bg-gray-700 rounded-lg hover:bg-[#00ffb3]/20 transition transform hover:scale-105 flex flex-col items-center">
+                        <img src="https://icon.icepanel.io/Technology/svg/Qt-Framework.svg" alt="Qt Framework" class="w-12 h-12 mb-2">
+                        <p class="text-white text-sm font-medium">Qt Framework</p>
+                    </div>
+                    
+                    <!-- Jupyter -->
+                    <div class="p-4 bg-gray-700 rounded-lg hover:bg-[#00ffb3]/20 transition transform hover:scale-105 flex flex-col items-center">
+                        <img src="https://icon.icepanel.io/Technology/svg/Jupyter.svg" alt="Jupyter" class="w-12 h-12 mb-2">
+                        <p class="text-white text-sm font-medium">Jupyter</p>
+                    </div>
+                    
+                    <!-- Kaggle -->
+                    <div class="p-4 bg-gray-700 rounded-lg hover:bg-[#00ffb3]/20 transition transform hover:scale-105 flex flex-col items-center">
+                        <img src="https://icon.icepanel.io/Technology/svg/Kaggle.svg" alt="Kaggle" class="w-12 h-12 mb-2">
+                        <p class="text-white text-sm font-medium">Kaggle</p>
+                    </div>
+                    
+                    <!-- LinkedIn -->
+                    <div class="p-4 bg-gray-700 rounded-lg hover:bg-[#00ffb3]/20 transition transform hover:scale-105 flex flex-col items-center">
+                        <img src="https://icon.icepanel.io/Technology/svg/LinkedIn.svg" alt="LinkedIn" class="w-12 h-12 mb-2">
+                        <p class="text-white text-sm font-medium">LinkedIn</p>
+                    </div>
+                    
+                    <!-- SQL Developer -->
+                    <div class="p-4 bg-gray-700 rounded-lg hover:bg-[#00ffb3]/20 transition transform hover:scale-105 flex flex-col items-center">
+                        <img src="https://icon.icepanel.io/Technology/svg/SQL-Developer.svg" alt="SQL Developer" class="w-12 h-12 mb-2">
+                        <p class="text-white text-sm font-medium">SQL Developer</p>
+                    </div>
+                    
+                    <!-- AngularJS -->
+                    <div class="p-4 bg-gray-700 rounded-lg hover:bg-[#00ffb3]/20 transition transform hover:scale-105 flex flex-col items-center">
+                        <img src="https://icon.icepanel.io/Technology/svg/AngularJS.svg" alt="AngularJS" class="w-12 h-12 mb-2">
+                        <p class="text-white text-sm font-medium">AngularJS</p>
+                    </div>
+                    
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. CONTACT / CTA FOOTER -->
+        <section id="contact" class="bg-gray-900 py-16 scroll-reveal">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-3xl font-bold text-white mb-4">Ready to Build Something Great?</h2>
+                <p class="text-xl text-gray-400 mb-8 max-w-2xl mx-auto">
+                    If you need a reliable product engineer who can take a project from concept to launch, let's connect.
+                </p>
+                
+                <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6">
+                    <a href="mailto:youremail@example.com" class="bg-[#00ffb3] text-gray-900 px-8 py-3 font-bold rounded-xl hover:bg-white transition duration-300 shadow-xl">
+                        Send Me an Email
+                    </a>
+                    <a href="https://linkedin.com/in/yourprofile" target="_blank" class="border border-gray-600 text-white px-8 py-3 font-semibold rounded-xl hover:bg-gray-700 transition duration-300">
+                        Connect on LinkedIn
+                    </a>
+                </div>
+
+                <div class="mt-12 pt-8 border-t border-gray-700 text-sm text-gray-500">
+                    <p>&copy; <span id="currentYear"></span> Rahul Waghmare. All rights reserved.</p>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        // Get current year for footer
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        // JavaScript for Scroll Reveal Animation
+        const elements = document.querySelectorAll('.scroll-reveal');
+        
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target); // Stop observing once visible
+                }
+            });
+        }, {
+            // Options: Start loading slightly before entering viewport
+            rootMargin: '0px',
+            threshold: 0.1 
+        });
+
+        elements.forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
