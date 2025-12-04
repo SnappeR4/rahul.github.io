@@ -8,7 +8,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
     <style>
-        /* Custom Styles for Subtle Animations */
+/* Custom Styles for Subtle Animations */
         body {
             font-family: 'Inter', sans-serif;
             background-color: #0d1117; /* GitHub Dark Theme Background */
@@ -34,124 +34,152 @@
             opacity: 1;
             transform: translateY(0);
         }
-        /* Floating Icons Animation - Improved Version */
-.floating-icon {
-    position: absolute;
-    width: 70px;
-    height: 70px;
-    background: rgba(0, 255, 179, 0.15);
-    border: 2px solid rgba(0, 255, 179, 0.4);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    animation: floatSimple 4s ease-in-out infinite;
-    animation-delay: calc(var(--i) * 0.4s);
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%) rotate(var(--angle)) translateX(160px);
-    transition: all 0.4s ease;
-    backdrop-filter: blur(8px);
-    box-shadow: 0 4px 15px rgba(0, 255, 179, 0.2);
-}
-
-.floating-icon:hover {
-    background: rgba(0, 255, 179, 0.25);
-    border-color: #00ffb3;
-    transform: translate(-50%, -50%) rotate(var(--angle)) translateX(160px) scale(1.15);
-    box-shadow: 0 8px 25px rgba(0, 255, 179, 0.4);
-    z-index: 10;
-}
-
-.floating-icon img {
-    width: 40px;
-    height: 40px;
-    transition: all 0.4s ease;
-    filter: brightness(0.9) contrast(1.2);
-}
-
-.floating-icon:hover img {
-    transform: scale(1.1);
-    filter: brightness(1.2) contrast(1.3);
-}
-
-@keyframes floatSimple {
-    0%, 100% {
-        transform: translate(-50%, -50%) rotate(var(--angle)) translateX(160px) translateY(0px);
-    }
-    50% {
-        transform: translate(-50%, -50%) rotate(var(--angle)) translateX(160px) translateY(-15px);
-    }
-}
-
-/* Pulse animation for extra effect */
-.floating-icon::before {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    background: rgba(0, 255, 179, 0.1);
-    animation: pulse 3s ease-in-out infinite;
-    animation-delay: calc(var(--i) * 0.6s);
-    z-index: -1;
-}
-
-@keyframes pulse {
-    0%, 100% {
-        transform: scale(1);
-        opacity: 0.6;
-    }
-    50% {
-        transform: scale(1.3);
-        opacity: 0.3;
-    }
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    .floating-icon {
-        width: 60px;
-        height: 60px;
-        transform: translate(-50%, -50%) rotate(var(--angle)) translateX(120px);
-    }
-    
-    .floating-icon img {
-        width: 32px;
-        height: 32px;
-    }
-    
-    @keyframes floatSimple {
-        0%, 100% {
-            transform: translate(-50%, -50%) rotate(var(--angle)) translateX(120px) translateY(0px);
+        /* Floating Icons Animation - Updated with more space */
+        .floating-icon {
+            position: absolute;
+            width: 70px;
+            height: 70px;
+            background: rgba(0, 255, 179, 0.15);
+            border: 2px solid rgba(0, 255, 179, 0.4);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: floatSimple 4s ease-in-out infinite;
+            animation-delay: calc(var(--i) * 0.4s);
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%) rotate(var(--angle)) translateX(180px);
+            transition: all 0.4s ease;
+            backdrop-filter: blur(8px);
+            box-shadow: 0 4px 15px rgba(0, 255, 179, 0.2);
+            z-index: 10;
         }
-        50% {
-            transform: translate(-50%, -50%) rotate(var(--angle)) translateX(120px) translateY(-12px);
-        }
-    }
-}
 
-@media (max-width: 480px) {
-    .floating-icon {
-        width: 50px;
-        height: 50px;
-        transform: translate(-50%, -50%) rotate(var(--angle)) translateX(100px);
-    }
-    
-    .floating-icon img {
-        width: 28px;
-        height: 28px;
-    }
-    
-    @keyframes floatSimple {
-        0%, 100% {
-            transform: translate(-50%, -50%) rotate(var(--angle)) translateX(100px) translateY(0px);
+        .floating-icon:hover {
+            background: rgba(0, 255, 179, 0.25);
+            border-color: #00ffb3;
+            transform: translate(-50%, -50%) rotate(var(--angle)) translateX(180px) scale(1.15);
+            box-shadow: 0 8px 25px rgba(0, 255, 179, 0.4);
+            z-index: 20;
         }
-        50% {
-            transform: translate(-50%, -50%) rotate(var(--angle)) translateX(100px) translateY(-10px);
+
+        .floating-icon img {
+            width: 40px;
+            height: 40px;
+            transition: all 0.4s ease;
+            filter: brightness(0.9) contrast(1.2);
         }
-    }
-}
+
+        .floating-icon:hover img {
+            transform: scale(1.1);
+            filter: brightness(1.2) contrast(1.3);
+        }
+
+        @keyframes floatSimple {
+            0%, 100% {
+                transform: translate(-50%, -50%) rotate(var(--angle)) translateX(180px) translateY(0px);
+            }
+            50% {
+                transform: translate(-50%, -50%) rotate(var(--angle)) translateX(180px) translateY(-15px);
+            }
+        }
+
+        /* Pulse animation for extra effect */
+        .floating-icon::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: rgba(0, 255, 179, 0.1);
+            animation: pulse 3s ease-in-out infinite;
+            animation-delay: calc(var(--i) * 0.6s);
+            z-index: -1;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 0.6;
+            }
+            50% {
+                transform: scale(1.3);
+                opacity: 0.3;
+            }
+        }
+
+        /* Headshot image styling */
+        .headshot-container {
+            position: relative;
+            width: 300px;
+            height: 300px;
+        }
+
+        .headshot-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 4px solid #00ffb3;
+            box-shadow: 0 0 30px rgba(0, 255, 179, 0.3);
+            background: linear-gradient(135deg, #0d1117 0%, #1a1f2c 100%);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .floating-icon {
+                width: 60px;
+                height: 60px;
+                transform: translate(-50%, -50%) rotate(var(--angle)) translateX(140px);
+            }
+            
+            .floating-icon img {
+                width: 32px;
+                height: 32px;
+            }
+            
+            .headshot-container {
+                width: 250px;
+                height: 250px;
+            }
+            
+            @keyframes floatSimple {
+                0%, 100% {
+                    transform: translate(-50%, -50%) rotate(var(--angle)) translateX(140px) translateY(0px);
+                }
+                50% {
+                    transform: translate(-50%, -50%) rotate(var(--angle)) translateX(140px) translateY(-12px);
+                }
+            }
+        }
+
+        @media (max-width: 480px) {
+            .floating-icon {
+                width: 50px;
+                height: 50px;
+                transform: translate(-50%, -50%) rotate(var(--angle)) translateX(120px);
+            }
+            
+            .floating-icon img {
+                width: 28px;
+                height: 28px;
+            }
+            
+            .headshot-container {
+                width: 200px;
+                height: 200px;
+            }
+            
+            @keyframes floatSimple {
+                0%, 100% {
+                    transform: translate(-50%, -50%) rotate(var(--angle)) translateX(120px) translateY(0px);
+                }
+                50% {
+                    transform: translate(-50%, -50%) rotate(var(--angle)) translateX(120px) translateY(-10px);
+                }
+            }
+        }
     </style>
 </head>
 <body>
@@ -200,64 +228,63 @@
                 </div>
             </div>
 
-<!-- Headshot with Circular Floating Technology Icons -->
-<div class="md:w-1/4 mt-12 md:mt-0 flex justify-center scroll-reveal delay-300 relative">
-    <!-- Photo container (empty for now) -->
-    <div class="w-64 h-64 bg-gradient-to-br from-gray-800 to-gray-900 rounded-full flex items-center justify-center border-4 border-[#00ffb3]/50 shadow-2xl shadow-[#00ffb3]/20 overflow-hidden">
-        <div class="text-center text-gray-400">
-            <div class="text-4xl mb-2">👨‍💻</div>
-            <p class="text-sm">Photo Coming Soon</p>
-        </div>
-    </div>
-    
-    <!-- Floating Technology Icons -->
-    <div class="absolute inset-0">
-        <!-- Dart -->
-        <div class="floating-icon" style="--i:1; --angle:0deg;">
-            <img src="https://icon.icepanel.io/Technology/svg/Dart.svg" alt="Dart" class="w-10 h-10">
-        </div>
-        
-        <!-- Express -->
-        <div class="floating-icon" style="--i:2; --angle:40deg;">
-            <img src="https://icon.icepanel.io/Technology/svg/Express.svg" alt="Express" class="w-10 h-10">
-        </div>
-        
-        <!-- Figma -->
-        <div class="floating-icon" style="--i:3; --angle:80deg;">
-            <img src="https://icon.icepanel.io/Technology/svg/Figma.svg" alt="Figma" class="w-10 h-10">
-        </div>
-        
-        <!-- Flutter -->
-        <div class="floating-icon" style="--i:4; --angle:120deg;">
-            <img src="https://icon.icepanel.io/Technology/svg/Flutter.svg" alt="Flutter" class="w-10 h-10">
-        </div>
-        
-        <!-- JavaScript -->
-        <div class="floating-icon" style="--i:5; --angle:160deg;">
-            <img src="https://icon.icepanel.io/Technology/svg/JavaScript.svg" alt="JavaScript" class="w-10 h-10">
-        </div>
-        
-        <!-- MongoDB -->
-        <div class="floating-icon" style="--i:6; --angle:200deg;">
-            <img src="https://icon.icepanel.io/Technology/svg/MongoDB.svg" alt="MongoDB" class="w-10 h-10">
-        </div>
-        
-        <!-- Node.js -->
-        <div class="floating-icon" style="--i:7; --angle:240deg;">
-            <img src="https://icon.icepanel.io/Technology/svg/Node.js.svg" alt="Node.js" class="w-10 h-10">
-        </div>
-        
-        <!-- Postman -->
-        <div class="floating-icon" style="--i:8; --angle:280deg;">
-            <img src="https://icon.icepanel.io/Technology/svg/Postman.svg" alt="Postman" class="w-10 h-10">
-        </div>
-        
-        <!-- VS Code -->
-        <div class="floating-icon" style="--i:9; --angle:320deg;">
-            <img src="https://icon.icepanel.io/Technology/svg/Visual-Studio-Code-%28VS-Code%29.svg" alt="VS Code" class="w-10 h-10">
-        </div>
-    </div>
-</div>
+            <!-- Headshot with Circular Floating Technology Icons -->
+            <div class="md:w-1/4 mt-12 md:mt-0 flex justify-center scroll-reveal delay-300 relative headshot-container">
+                <!-- Professional anime-style sketch of working on computer -->
+                <img 
+                    src="https://i.ibb.co/6RLMtPGX/23500f34-09f2-46cb-9391-5e28c81db13e-removalai-preview.png" 
+                    alt="Rahul Waghmare - Professional Developer Sketch"
+                    class="headshot-image"
+                >
+                
+                <!-- Floating Technology Icons - Increased distance with translateX(180px) -->
+                <div class="absolute inset-0">
+                    <!-- Dart -->
+                    <div class="floating-icon" style="--i:1; --angle:0deg;">
+                        <img src="https://icon.icepanel.io/Technology/svg/Dart.svg" alt="Dart" class="w-10 h-10">
+                    </div>
+                    
+                    <!-- Express -->
+                    <div class="floating-icon" style="--i:2; --angle:40deg;">
+                        <img src="https://icon.icepanel.io/Technology/svg/Express.svg" alt="Express" class="w-10 h-10">
+                    </div>
+                    
+                    <!-- Figma -->
+                    <div class="floating-icon" style="--i:3; --angle:80deg;">
+                        <img src="https://icon.icepanel.io/Technology/svg/Figma.svg" alt="Figma" class="w-10 h-10">
+                    </div>
+                    
+                    <!-- Flutter -->
+                    <div class="floating-icon" style="--i:4; --angle:120deg;">
+                        <img src="https://icon.icepanel.io/Technology/svg/Flutter.svg" alt="Flutter" class="w-10 h-10">
+                    </div>
+                    
+                    <!-- JavaScript -->
+                    <div class="floating-icon" style="--i:5; --angle:160deg;">
+                        <img src="https://icon.icepanel.io/Technology/svg/JavaScript.svg" alt="JavaScript" class="w-10 h-10">
+                    </div>
+                    
+                    <!-- MongoDB -->
+                    <div class="floating-icon" style="--i:6; --angle:200deg;">
+                        <img src="https://icon.icepanel.io/Technology/svg/MongoDB.svg" alt="MongoDB" class="w-10 h-10">
+                    </div>
+                    
+                    <!-- Node.js -->
+                    <div class="floating-icon" style="--i:7; --angle:240deg;">
+                        <img src="https://icon.icepanel.io/Technology/svg/Node.js.svg" alt="Node.js" class="w-10 h-10">
+                    </div>
+                    
+                    <!-- Postman -->
+                    <div class="floating-icon" style="--i:8; --angle:280deg;">
+                        <img src="https://icon.icepanel.io/Technology/svg/Postman.svg" alt="Postman" class="w-10 h-10">
+                    </div>
+                    
+                    <!-- VS Code -->
+                    <div class="floating-icon" style="--i:9; --angle:320deg;">
+                        <img src="https://icon.icepanel.io/Technology/svg/Visual-Studio-Code-%28VS-Code%29.svg" alt="VS Code" class="w-10 h-10">
+                    </div>
+                </div>
+            </div>
         </section>
 
         <!-- 2. CORE COMPETENCY / ABOUT ME -->
