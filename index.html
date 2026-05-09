@@ -1,745 +1,1233 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rahul Waghmare | Full-Stack Product Engineer</title>
-    <!-- Load Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
-    <style>
-/* Custom Styles for Subtle Animations */
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #0d1117; /* GitHub Dark Theme Background */
-            color: #c9d1d9; /* Light gray text */
-        }
-        .container {
-            max-width: 1280px;
-        }
-        .card-project {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .card-project:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 10px 25px rgba(0, 255, 179, 0.15); /* Subtle turquoise glow */
-        }
-        /* Scroll Reveal Effect Class */
-        .scroll-reveal {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-        }
-        .scroll-reveal.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        /* Floating Icons Animation - Updated with more space */
-        .floating-icon {
-            position: absolute;
-            width: 70px;
-            height: 70px;
-            background: rgba(0, 255, 179, 0.15);
-            border: 2px solid rgba(0, 255, 179, 0.4);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            animation: floatSimple 4s ease-in-out infinite;
-            animation-delay: calc(var(--i) * 0.4s);
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%) rotate(var(--angle)) translateX(180px);
-            transition: all 0.4s ease;
-            backdrop-filter: blur(8px);
-            box-shadow: 0 4px 15px rgba(0, 255, 179, 0.2);
-            z-index: 10;
-        }
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Rahul Waghmare — Mobile Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --bg: #080c10;
+  --bg2: #0d1117;
+  --surface: #111820;
+  --border: #1e2d3d;
+  --cyan: #00d4ff;
+  --cyan2: #00ffcc;
+  --orange: #ff6b35;
+  --text: #e2e8f0;
+  --text-dim: #6b8199;
+  --text-muted: #3a4f63;
+  --glow: 0 0 20px rgba(0,212,255,0.3);
+  --glow-strong: 0 0 40px rgba(0,212,255,0.5);
+}
 
-        .floating-icon:hover {
-            background: rgba(0, 255, 179, 0.25);
-            border-color: #00ffb3;
-            transform: translate(-50%, -50%) rotate(var(--angle)) translateX(180px) scale(1.15);
-            box-shadow: 0 8px 25px rgba(0, 255, 179, 0.4);
-            z-index: 20;
-        }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-        .floating-icon img {
-            width: 40px;
-            height: 40px;
-            transition: all 0.4s ease;
-            filter: brightness(0.9) contrast(1.2);
-        }
+html { scroll-behavior: smooth; }
 
-        .floating-icon:hover img {
-            transform: scale(1.1);
-            filter: brightness(1.2) contrast(1.3);
-        }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 14px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  cursor: none;
+}
 
-        @keyframes floatSimple {
-            0%, 100% {
-                transform: translate(-50%, -50%) rotate(var(--angle)) translateX(180px) translateY(0px);
-            }
-            50% {
-                transform: translate(-50%, -50%) rotate(var(--angle)) translateX(180px) translateY(-15px);
-            }
-        }
+/* Custom cursor */
+.cursor {
+  position: fixed;
+  width: 12px; height: 12px;
+  background: var(--cyan);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  mix-blend-mode: screen;
+  transform: translate(-50%, -50%);
+  transition: transform 0.1s, width 0.2s, height 0.2s, background 0.2s;
+}
+.cursor-ring {
+  position: fixed;
+  width: 36px; height: 36px;
+  border: 1px solid rgba(0,212,255,0.4);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: transform 0.15s ease-out, width 0.3s, height 0.3s;
+}
+body:has(a:hover) .cursor, body:has(button:hover) .cursor { width: 20px; height: 20px; background: var(--cyan2); }
 
-        /* Pulse animation for extra effect */
-        .floating-icon::before {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            background: rgba(0, 255, 179, 0.1);
-            animation: pulse 3s ease-in-out infinite;
-            animation-delay: calc(var(--i) * 0.6s);
-            z-index: -1;
-        }
+/* Grid bg texture */
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background-image: 
+    linear-gradient(rgba(0,212,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,212,255,0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+  z-index: 0;
+}
 
-        @keyframes pulse {
-            0%, 100% {
-                transform: scale(1);
-                opacity: 0.6;
-            }
-            50% {
-                transform: scale(1.3);
-                opacity: 0.3;
-            }
-        }
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.2rem 4rem;
+  background: rgba(8,12,16,0.85);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-logo {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  color: var(--cyan);
+  text-decoration: none;
+}
+.nav-logo span { color: var(--text-dim); }
+.nav-links { display: flex; gap: 2.5rem; list-style: none; }
+.nav-links a {
+  color: var(--text-dim);
+  text-decoration: none;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  transition: color 0.2s;
+  position: relative;
+}
+.nav-links a::after {
+  content: '';
+  position: absolute; bottom: -4px; left: 0; right: 0;
+  height: 1px; background: var(--cyan);
+  transform: scaleX(0); transition: transform 0.2s;
+}
+.nav-links a:hover { color: var(--cyan); }
+.nav-links a:hover::after { transform: scaleX(1); }
+.nav-cta {
+  background: transparent;
+  border: 1px solid var(--cyan);
+  color: var(--cyan);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.6rem 1.4rem;
+  cursor: none;
+  text-decoration: none;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+.nav-cta:hover { background: rgba(0,212,255,0.08); box-shadow: var(--glow); }
 
-        /* Headshot image styling */
-        .headshot-container {
-            position: relative;
-            width: 300px;
-            height: 300px;
-        }
+/* ── HERO ── */
+#hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex; align-items: center;
+  padding: 8rem 4rem 4rem;
+  overflow: hidden;
+}
+.hero-bg-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+}
+.orb1 { width: 500px; height: 500px; background: rgba(0,212,255,0.07); top: -100px; right: -100px; }
+.orb2 { width: 300px; height: 300px; background: rgba(255,107,53,0.05); bottom: 0; left: 10%; }
 
-        .headshot-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 50%;
-            border: 4px solid #00ffb3;
-            box-shadow: 0 0 30px rgba(0, 255, 179, 0.3);
-            background: linear-gradient(135deg, #0d1117 0%, #1a1f2c 100%);
-        }
+.hero-content { position: relative; z-index: 1; max-width: 800px; }
 
-        /* Responsive adjustments */
-        @media (max-width: 768px) {
-            .floating-icon {
-                width: 60px;
-                height: 60px;
-                transform: translate(-50%, -50%) rotate(var(--angle)) translateX(140px);
-            }
-            
-            .floating-icon img {
-                width: 32px;
-                height: 32px;
-            }
-            
-            .headshot-container {
-                width: 250px;
-                height: 250px;
-            }
-            
-            @keyframes floatSimple {
-                0%, 100% {
-                    transform: translate(-50%, -50%) rotate(var(--angle)) translateX(140px) translateY(0px);
-                }
-                50% {
-                    transform: translate(-50%, -50%) rotate(var(--angle)) translateX(140px) translateY(-12px);
-                }
-            }
-        }
+.hero-tag {
+  display: inline-flex; align-items: center; gap: 0.6rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--cyan);
+  margin-bottom: 2rem;
+  opacity: 0; animation: fadeUp 0.6s ease forwards;
+}
+.hero-tag::before { content: '●'; animation: blink 1.2s infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
 
-        @media (max-width: 480px) {
-            .floating-icon {
-                width: 50px;
-                height: 50px;
-                transform: translate(-50%, -50%) rotate(var(--angle)) translateX(120px);
-            }
-            
-            .floating-icon img {
-                width: 28px;
-                height: 28px;
-            }
-            
-            .headshot-container {
-                width: 200px;
-                height: 200px;
-            }
-            
-            @keyframes floatSimple {
-                0%, 100% {
-                    transform: translate(-50%, -50%) rotate(var(--angle)) translateX(120px) translateY(0px);
-                }
-                50% {
-                    transform: translate(-50%, -50%) rotate(var(--angle)) translateX(120px) translateY(-10px);
-                }
-            }
-        }
-    </style>
+.hero-name {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(3.5rem, 8vw, 7rem);
+  font-weight: 800;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  opacity: 0; animation: fadeUp 0.6s 0.1s ease forwards;
+  margin-bottom: 0.5rem;
+}
+.hero-name .accent { color: var(--cyan); }
+.hero-name .dim { color: var(--text-muted); }
+
+.hero-title {
+  font-size: clamp(0.85rem, 2vw, 1.1rem);
+  color: var(--text-dim);
+  margin-bottom: 2.5rem;
+  opacity: 0; animation: fadeUp 0.6s 0.2s ease forwards;
+  font-weight: 300;
+}
+.hero-title .hi { color: var(--orange); }
+
+.hero-desc {
+  font-size: 0.9rem;
+  color: var(--text-dim);
+  max-width: 560px;
+  line-height: 1.9;
+  margin-bottom: 3rem;
+  opacity: 0; animation: fadeUp 0.6s 0.3s ease forwards;
+  font-weight: 300;
+}
+
+.hero-stats {
+  display: flex; gap: 3rem;
+  margin-bottom: 3rem;
+  opacity: 0; animation: fadeUp 0.6s 0.4s ease forwards;
+}
+.stat-item { }
+.stat-num {
+  font-family: 'Syne', sans-serif;
+  font-size: 2rem; font-weight: 800;
+  color: var(--cyan);
+  line-height: 1;
+}
+.stat-label { font-size: 0.7rem; color: var(--text-muted); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 0.2rem; }
+
+.hero-btns {
+  display: flex; gap: 1.2rem;
+  opacity: 0; animation: fadeUp 0.6s 0.5s ease forwards;
+}
+.btn-primary {
+  background: var(--cyan);
+  color: var(--bg);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.9rem 2rem;
+  text-decoration: none;
+  transition: box-shadow 0.2s, transform 0.2s;
+  display: inline-block;
+}
+.btn-primary:hover { box-shadow: var(--glow-strong); transform: translateY(-2px); }
+.btn-ghost {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.9rem 2rem;
+  text-decoration: none;
+  transition: border-color 0.2s, color 0.2s;
+  display: inline-block;
+}
+.btn-ghost:hover { border-color: var(--cyan); color: var(--cyan); }
+
+.hero-right {
+  position: absolute; right: 4rem; top: 50%;
+  transform: translateY(-50%);
+  opacity: 0; animation: fadeUp 0.6s 0.6s ease forwards;
+}
+.terminal-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  width: 340px;
+  font-size: 0.72rem;
+}
+.terminal-bar {
+  display: flex; align-items: center; gap: 0.5rem;
+  padding: 0.7rem 1rem;
+  border-bottom: 1px solid var(--border);
+  background: rgba(0,0,0,0.3);
+}
+.dot { width: 8px; height: 8px; border-radius: 50%; }
+.dot-r { background: #ff5f56; }
+.dot-y { background: #ffbd2e; }
+.dot-g { background: #27c93f; }
+.terminal-title { color: var(--text-muted); font-size: 0.65rem; margin-left: auto; letter-spacing: 0.1em; }
+.terminal-body { padding: 1.2rem 1.4rem; line-height: 2; }
+.t-prompt { color: var(--cyan2); }
+.t-cmd { color: var(--text); }
+.t-out { color: var(--text-dim); padding-left: 1.4rem; }
+.t-key { color: var(--cyan); }
+.t-val { color: var(--orange); }
+.t-cursor-blink { display: inline-block; width: 7px; height: 14px; background: var(--cyan); animation: blink 1s infinite; vertical-align: middle; }
+
+/* scroll indicator */
+.scroll-hint {
+  position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+  color: var(--text-muted); font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase;
+  opacity: 0; animation: fadeUp 0.6s 0.9s ease forwards;
+}
+.scroll-line {
+  width: 1px; height: 50px;
+  background: linear-gradient(to bottom, var(--cyan), transparent);
+  animation: scrollLine 1.5s ease-in-out infinite;
+}
+@keyframes scrollLine { 0%{transform:scaleY(0);transform-origin:top} 50%{transform:scaleY(1);transform-origin:top} 51%{transform-origin:bottom} 100%{transform:scaleY(0);transform-origin:bottom} }
+
+/* ── SECTIONS COMMON ── */
+section { position: relative; z-index: 1; }
+.section-inner { max-width: 1100px; margin: 0 auto; padding: 6rem 4rem; }
+.section-label {
+  font-size: 0.68rem; letter-spacing: 0.25em; text-transform: uppercase;
+  color: var(--cyan); margin-bottom: 0.6rem;
+}
+.section-label::before { content: '// '; }
+.section-title {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 3rem;
+  color: var(--text);
+}
+
+/* ── EXPERIENCE ── */
+#experience { background: var(--bg2); border-top: 1px solid var(--border); }
+
+.exp-list { display: flex; flex-direction: column; gap: 0; }
+.exp-item {
+  display: grid; grid-template-columns: 220px 1fr;
+  gap: 0 3rem;
+  padding: 2.5rem 0;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+.exp-item::before {
+  content: '';
+  position: absolute; left: 218px; top: 0; bottom: 0;
+  width: 1px; background: var(--border);
+}
+.exp-left { }
+.exp-date { font-size: 0.7rem; color: var(--text-muted); letter-spacing: 0.1em; margin-bottom: 0.4rem; }
+.exp-company {
+  font-family: 'Syne', sans-serif;
+  font-size: 1rem; font-weight: 700;
+  color: var(--text);
+  margin-bottom: 0.2rem;
+}
+.exp-loc { font-size: 0.68rem; color: var(--text-muted); }
+.exp-badge {
+  display: inline-block;
+  margin-top: 0.8rem;
+  padding: 0.2rem 0.7rem;
+  background: rgba(0,212,255,0.07);
+  border: 1px solid rgba(0,212,255,0.2);
+  color: var(--cyan);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.exp-right { padding-left: 2rem; }
+.exp-role {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.2rem; font-weight: 700;
+  color: var(--text); margin-bottom: 1rem;
+}
+.exp-points { list-style: none; }
+.exp-points li {
+  color: var(--text-dim);
+  font-size: 0.82rem;
+  line-height: 1.8;
+  margin-bottom: 0.5rem;
+  padding-left: 1.2rem;
+  position: relative;
+}
+.exp-points li::before { content: '›'; position: absolute; left: 0; color: var(--cyan); }
+
+/* ── APPS / PROJECTS ── */
+#projects { border-top: 1px solid var(--border); }
+.apps-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1px;
+  border: 1px solid var(--border);
+  background: var(--border);
+  margin-bottom: 4rem;
+}
+.app-card {
+  background: var(--bg2);
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.2s;
+  text-decoration: none;
+  display: block;
+}
+.app-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--cyan), var(--cyan2));
+  transform: scaleX(0); transform-origin: left;
+  transition: transform 0.3s;
+}
+.app-card:hover { background: var(--surface); }
+.app-card:hover::before { transform: scaleX(1); }
+
+.app-icon {
+  font-size: 2rem; margin-bottom: 1.2rem;
+  display: inline-block;
+  transition: transform 0.3s;
+}
+.app-card:hover .app-icon { transform: scale(1.15) rotate(-5deg); }
+.app-name {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.05rem; font-weight: 700;
+  color: var(--text); margin-bottom: 0.5rem;
+}
+.app-desc { font-size: 0.78rem; color: var(--text-dim); line-height: 1.7; margin-bottom: 1.2rem; }
+.app-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.tag {
+  font-size: 0.63rem; letter-spacing: 0.08em;
+  padding: 0.2rem 0.6rem;
+  background: rgba(0,212,255,0.06);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+}
+.app-store-badge {
+  position: absolute; top: 1.5rem; right: 1.5rem;
+  font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--cyan2); border: 1px solid rgba(0,255,204,0.3);
+  padding: 0.2rem 0.5rem;
+}
+.app-users { font-size: 0.72rem; color: var(--orange); margin-top: 0.8rem; }
+.app-users span { font-family: 'Syne', sans-serif; font-weight: 700; }
+
+/* other projects non-linked */
+.other-projects {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1rem;
+  margin-top: 2rem;
+}
+.other-card {
+  padding: 1.5rem;
+  border: 1px solid var(--border);
+  background: transparent;
+  transition: border-color 0.2s;
+}
+.other-card:hover { border-color: rgba(0,212,255,0.3); }
+.other-name { font-family: 'Syne', sans-serif; font-size: 0.95rem; font-weight: 700; color: var(--text); margin-bottom: 0.5rem; }
+.other-desc { font-size: 0.78rem; color: var(--text-dim); line-height: 1.7; }
+
+/* ── SKILLS ── */
+#skills { background: var(--bg2); border-top: 1px solid var(--border); }
+.skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1.5rem; }
+.skill-group {
+  border: 1px solid var(--border);
+  padding: 1.5rem;
+  background: var(--bg);
+  position: relative;
+  overflow: hidden;
+}
+.skill-group::after {
+  content: '';
+  position: absolute; bottom: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--cyan), transparent);
+}
+.skill-group-title {
+  font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--cyan); margin-bottom: 1rem;
+}
+.skill-list { list-style: none; }
+.skill-list li {
+  font-size: 0.8rem; color: var(--text-dim);
+  padding: 0.3rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+  display: flex; justify-content: space-between; align-items: center;
+}
+.skill-list li:last-child { border-bottom: none; }
+.skill-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--cyan);
+  box-shadow: 0 0 6px var(--cyan);
+}
+.skill-dot.dim { background: var(--border); box-shadow: none; }
+.skill-dot.mid { background: var(--cyan2); box-shadow: 0 0 6px var(--cyan2); }
+
+/* tech icons strip */
+.tech-strip {
+  margin-top: 4rem;
+  border: 1px solid var(--border);
+  padding: 2rem;
+  display: flex; flex-wrap: wrap; gap: 2rem; justify-content: center; align-items: center;
+}
+.tech-item {
+  display: flex; flex-direction: column; align-items: center; gap: 0.4rem;
+  font-size: 0.62rem; color: var(--text-muted); letter-spacing: 0.08em;
+  transition: color 0.2s, transform 0.2s;
+}
+.tech-item:hover { color: var(--cyan); transform: translateY(-3px); }
+.tech-item svg { width: 28px; height: 28px; opacity: 0.65; transition: opacity 0.2s, transform 0.2s; }
+.tech-item:hover svg { opacity: 1; }
+
+/* ── ABOUT / EDUCATION ── */
+#about { border-top: 1px solid var(--border); }
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+.about-text h3 {
+  font-family: 'Syne', sans-serif; font-size: 1.5rem; font-weight: 700;
+  color: var(--text); margin-bottom: 1.2rem;
+}
+.about-text p { font-size: 0.83rem; color: var(--text-dim); line-height: 2; margin-bottom: 1rem; }
+.about-text p strong { color: var(--cyan); font-weight: 500; }
+
+.edu-card {
+  border: 1px solid var(--border);
+  padding: 2rem;
+  background: var(--bg2);
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+.edu-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; bottom: 0;
+  width: 2px; background: var(--cyan);
+}
+.edu-degree { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; color: var(--text); }
+.edu-school { font-size: 0.78rem; color: var(--text-dim); margin-top: 0.3rem; }
+.edu-grade { font-size: 0.78rem; color: var(--cyan2); margin-top: 0.5rem; }
+.edu-year { font-size: 0.68rem; color: var(--text-muted); margin-top: 0.2rem; }
+
+.cert-list { list-style: none; }
+.cert-list li {
+  font-size: 0.78rem; color: var(--text-dim);
+  padding: 0.6rem 0;
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; gap: 0.6rem;
+}
+.cert-list li::before { content: '◆'; color: var(--orange); font-size: 0.5rem; }
+
+/* ── CONTACT ── */
+#contact { background: var(--bg2); border-top: 1px solid var(--border); }
+.contact-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+.contact-text h3 {
+  font-family: 'Syne', sans-serif; font-size: 2rem; font-weight: 800;
+  color: var(--text); line-height: 1.2; margin-bottom: 1rem;
+}
+.contact-text h3 .accent { color: var(--cyan); }
+.contact-text p { font-size: 0.83rem; color: var(--text-dim); line-height: 1.9; }
+.contact-links { display: flex; flex-direction: column; gap: 1rem; }
+.contact-link {
+  display: flex; align-items: center; gap: 1.2rem;
+  padding: 1.2rem 1.5rem;
+  border: 1px solid var(--border);
+  text-decoration: none;
+  color: var(--text-dim);
+  font-size: 0.82rem;
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+  background: var(--bg);
+}
+.contact-link:hover { border-color: var(--cyan); color: var(--cyan); background: rgba(0,212,255,0.04); }
+.contact-link-icon { font-size: 1.2rem; }
+.contact-link-info { }
+.contact-link-label { font-size: 0.65rem; color: var(--text-muted); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.1rem; }
+
+/* ── FOOTER ── */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 2rem 4rem;
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 0.68rem; color: var(--text-muted);
+  background: var(--bg);
+}
+.footer-brand { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 0.85rem; color: var(--text-dim); }
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.reveal {
+  opacity: 0; transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  nav { padding: 1rem 1.5rem; }
+  .nav-links { display: none; }
+  #hero { padding: 7rem 1.5rem 4rem; }
+  .hero-right { display: none; }
+  .hero-stats { flex-wrap: wrap; gap: 1.5rem; }
+  .section-inner { padding: 4rem 1.5rem; }
+  .exp-item { grid-template-columns: 1fr; gap: 1rem; }
+  .exp-item::before { display: none; }
+  .exp-right { padding-left: 0; }
+  .about-grid { grid-template-columns: 1fr; }
+  .contact-inner { grid-template-columns: 1fr; }
+  footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+}
+</style>
 </head>
 <body>
 
-    <!-- Header / Navigation (Simple) -->
-    <header class="sticky top-0 z-50 bg-black/80 backdrop-blur-sm shadow-lg">
-        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
-            <a href="#hero" class="text-2xl font-extrabold text-[#00ffb3] tracking-wider">
-                R W
-            </a>
-            <nav class="hidden md:flex space-x-8 text-sm font-medium">
-                <a href="#about" class="hover:text-[#00ffb3] transition duration-200">About</a>
-                <a href="#projects" class="hover:text-[#00ffb3] transition duration-200">Projects</a>
-                <a href="#skills" class="hover:text-[#00ffb3] transition duration-200">Skills</a>
-                <a href="#contact" class="hover:text-[#00ffb3] transition duration-200">Contact</a>
-            </nav>
-            <a href="https://drive.google.com/file/d/1z4pgmxuJpZjmqWMbArfpo4AQuoa8CT-9/view?usp=sharing" 
-               target="_blank" 
-               class="md:block hidden bg-[#00ffb3] text-gray-900 px-4 py-2 text-sm font-semibold rounded-lg hover:bg-white transition duration-300 shadow-md">
-                Download Resume
-            </a>
+<!-- Custom cursor -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- ══ NAV ══ -->
+<nav>
+  <a href="#hero" class="nav-logo">RW<span>.dev</span></a>
+  <ul class="nav-links">
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="mailto:rahulwaghmare751@gmail.com" class="nav-cta">Hire Me</a>
+</nav>
+
+<!-- ══ HERO ══ -->
+<section id="hero">
+  <div class="hero-bg-orb orb1"></div>
+  <div class="hero-bg-orb orb2"></div>
+
+  <div class="hero-content">
+    <div class="hero-tag">Available for opportunities</div>
+    <h1 class="hero-name">RAHUL<br><span class="accent">WAGHMARE</span><span class="dim">.</span></h1>
+    <p class="hero-title"><span class="hi">→</span> Mobile Engineer &amp; Full-Stack Product Developer · Mumbai, India</p>
+    <p class="hero-desc">
+      Flutter-first mobile engineer with a proven track record of owning the complete product lifecycle—from architecture to deployment—for apps serving <strong style="color:var(--cyan)">50K+ users</strong>. Specialized in POS systems, logistics, fintech, and hardware integrations.
+    </p>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <div class="stat-num">50K+</div>
+        <div class="stat-label">App Users</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">10+</div>
+        <div class="stat-label">Apps Shipped</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">3+</div>
+        <div class="stat-label">Years Exp</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">8.5</div>
+        <div class="stat-label">CGPA</div>
+      </div>
+    </div>
+    <div class="hero-btns">
+      <a href="#projects" class="btn-primary">View My Work</a>
+      <a href="#contact" class="btn-ghost">Get In Touch</a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="terminal-card">
+      <div class="terminal-bar">
+        <span class="dot dot-r"></span>
+        <span class="dot dot-y"></span>
+        <span class="dot dot-g"></span>
+        <span class="terminal-title">rahul@dev ~ profile.json</span>
+      </div>
+      <div class="terminal-body">
+        <div><span class="t-prompt">$</span> <span class="t-cmd">cat profile.json</span></div>
+        <div class="t-out">{</div>
+        <div class="t-out">&nbsp;&nbsp;<span class="t-key">"role"</span>: <span class="t-val">"Mobile Engineer"</span>,</div>
+        <div class="t-out">&nbsp;&nbsp;<span class="t-key">"primary"</span>: <span class="t-val">"Flutter / Dart"</span>,</div>
+        <div class="t-out">&nbsp;&nbsp;<span class="t-key">"backend"</span>: <span class="t-val">"Node.js + MongoDB"</span>,</div>
+        <div class="t-out">&nbsp;&nbsp;<span class="t-key">"android"</span>: <span class="t-val">"Java / Kotlin"</span>,</div>
+        <div class="t-out">&nbsp;&nbsp;<span class="t-key">"users"</span>: <span class="t-val">"50000+"</span>,</div>
+        <div class="t-out">&nbsp;&nbsp;<span class="t-key">"location"</span>: <span class="t-val">"Mumbai, IN"</span></div>
+        <div class="t-out">}</div>
+        <div style="margin-top:0.5rem"><span class="t-prompt">$</span> <span class="t-cursor-blink"></span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="scroll-hint">
+    <div class="scroll-line"></div>
+    Scroll
+  </div>
+</section>
+
+<!-- ══ EXPERIENCE ══ -->
+<section id="experience">
+  <div class="section-inner">
+    <div class="section-label">Work History</div>
+    <h2 class="section-title">Experience</h2>
+
+    <div class="exp-list">
+      <!-- Posiflow -->
+      <div class="exp-item reveal">
+        <div class="exp-left">
+          <div class="exp-date">Mar 2025 — Present</div>
+          <div class="exp-company">Posiflow</div>
+          <div class="exp-loc">Mumbai, India</div>
+          <div class="exp-badge">Current</div>
         </div>
-    </header>
+        <div class="exp-right">
+          <div class="exp-role">Software Developer</div>
+          <ul class="exp-points">
+            <li>Sole developer managing full product lifecycle — requirement gathering, system design, production deployment.</li>
+            <li><strong style="color:var(--text)">EasyLabel</strong>: Scaled an Android (Java, MVVM) label-design &amp; printing app to <strong style="color:var(--cyan)">50K+ users</strong> with custom marketplace and Bluetooth/USB/WiFi printer support.</li>
+            <li>Built robust backend systems with Node.js, Express, MongoDB — admin dashboards, user management, order handling.</li>
+            <li><strong style="color:var(--text)">CallSyncPro</strong>: Background Android app automating call log sync for sales CRM teams.</li>
+            <li>Built <strong style="color:var(--text)">ShipSense</strong> (Kotlin) for parcel tracking and <strong style="color:var(--text)">GetSetPrint</strong> (Flutter) for retail billing.</li>
+          </ul>
+        </div>
+      </div>
 
-    <main class="pt-16">
+      <!-- WDI -->
+      <div class="exp-item reveal">
+        <div class="exp-left">
+          <div class="exp-date">Dec 2024 — Feb 2025</div>
+          <div class="exp-company">WDI</div>
+          <div class="exp-loc">Mumbai, India</div>
+        </div>
+        <div class="exp-right">
+          <div class="exp-role">Flutter Developer</div>
+          <ul class="exp-points">
+            <li>Led mobile development for international clients — <strong style="color:var(--text)">Tanami Capital</strong> (Bahrain) and <strong style="color:var(--text)">Traders Circuit</strong>.</li>
+            <li>Delivered apps serving <strong style="color:var(--cyan)">10K+ users</strong> on both Play Store and Apple App Store.</li>
+            <li>Partnered with global UI/UX (Figma) and Web (React) teams for cross-platform feature parity.</li>
+            <li>Managed mobile department independently during management gaps, ensuring uninterrupted delivery.</li>
+          </ul>
+        </div>
+      </div>
 
-        <!-- 1. HERO SECTION -->
-        <section id="hero" class="container mx-auto px-6 py-20 md:py-32 flex flex-col md:flex-row items-center justify-between min-h-[80vh] scroll-reveal">
-            <div class="md:w-3/5 space-y-6 text-center md:text-left">
-                <p class="text-lg text-[#00ffb3] font-medium uppercase tracking-widest">
-                    Rahul Waghmare | Full-Stack Product Engineer
-                </p>
-                <h1 class="text-5xl md:text-7xl font-extrabold leading-tight text-white">
-                    I build, launch, <br> and manage <span class="text-[#00ffb3]">high-performance</span> applications.
-                </h1>
-                <p class="text-xl text-gray-400 max-w-xl pt-4">
-                    Expert in the entire product lifecycle, from UI/UX design and API creation (Node.js) to native app development (Flutter/Android) and cloud deployment.
-                </p>
-                <div class="pt-8 flex justify-center md:justify-start space-x-4">
-                    <a href="#projects" class="bg-[#00ffb3] text-gray-900 px-6 py-3 font-bold rounded-xl hover:bg-white transition duration-300 shadow-lg transform hover:scale-[1.02]">
-                        View My Work
-                    </a>
-                    <a href="#contact" class="border border-gray-600 text-white px-6 py-3 font-semibold rounded-xl hover:bg-gray-700 transition duration-300">
-                        Let's Talk
-                    </a>
-                </div>
-            </div>
+      <!-- Powercraft -->
+      <div class="exp-item reveal">
+        <div class="exp-left">
+          <div class="exp-date">Mar 2022 — Nov 2024</div>
+          <div class="exp-company">Powercraft</div>
+          <div class="exp-loc">Mumbai, India</div>
+        </div>
+        <div class="exp-right">
+          <div class="exp-role">Software Developer</div>
+          <ul class="exp-points">
+            <li>Built <strong style="color:var(--text)">Balaji e-Passbook</strong> &amp; <strong style="color:var(--text)">Balaji Pigmy Collection</strong> — offline-first financial apps with seamless cloud sync.</li>
+            <li>Developed Flutter-based retail POS billing systems integrated with Android POS hardware.</li>
+            <li>Designed custom printer drivers and embedded system integrations for weighing scales and analyzers.</li>
+            <li>Developed and maintained factory management apps for live business environments.</li>
+          </ul>
+        </div>
+      </div>
 
-            <!-- Headshot with Circular Floating Technology Icons -->
-            <div class="md:w-1/4 mt-12 md:mt-0 flex justify-center scroll-reveal delay-300 relative headshot-container">
-                <!-- Professional anime-style sketch of working on computer -->
-                <img 
-                    src="https://i.ibb.co/6RLMtPGX/23500f34-09f2-46cb-9391-5e28c81db13e-removalai-preview.png" 
-                    alt="Rahul Waghmare - Professional Developer Sketch"
-                    class="headshot-image"
-                >
-                
-                <!-- Floating Technology Icons - Increased distance with translateX(180px) -->
-                <div class="absolute inset-0">
-                    <!-- Dart -->
-                    <div class="floating-icon" style="--i:1; --angle:0deg;">
-                        <img src="https://icon.icepanel.io/Technology/svg/Dart.svg" alt="Dart" class="w-10 h-10">
-                    </div>
-                    
-                    <!-- Express -->
-                    <div class="floating-icon" style="--i:2; --angle:40deg;">
-                        <img src="https://icon.icepanel.io/Technology/svg/Express.svg" alt="Express" class="w-10 h-10">
-                    </div>
-                    
-                    <!-- Figma -->
-                    <div class="floating-icon" style="--i:3; --angle:80deg;">
-                        <img src="https://icon.icepanel.io/Technology/svg/Figma.svg" alt="Figma" class="w-10 h-10">
-                    </div>
-                    
-                    <!-- Flutter -->
-                    <div class="floating-icon" style="--i:4; --angle:120deg;">
-                        <img src="https://icon.icepanel.io/Technology/svg/Flutter.svg" alt="Flutter" class="w-10 h-10">
-                    </div>
-                    
-                    <!-- JavaScript -->
-                    <div class="floating-icon" style="--i:5; --angle:160deg;">
-                        <img src="https://icon.icepanel.io/Technology/svg/JavaScript.svg" alt="JavaScript" class="w-10 h-10">
-                    </div>
-                    
-                    <!-- MongoDB -->
-                    <div class="floating-icon" style="--i:6; --angle:200deg;">
-                        <img src="https://icon.icepanel.io/Technology/svg/MongoDB.svg" alt="MongoDB" class="w-10 h-10">
-                    </div>
-                    
-                    <!-- Node.js -->
-                    <div class="floating-icon" style="--i:7; --angle:240deg;">
-                        <img src="https://icon.icepanel.io/Technology/svg/Node.js.svg" alt="Node.js" class="w-10 h-10">
-                    </div>
-                    
-                    <!-- Postman -->
-                    <div class="floating-icon" style="--i:8; --angle:280deg;">
-                        <img src="https://icon.icepanel.io/Technology/svg/Postman.svg" alt="Postman" class="w-10 h-10">
-                    </div>
-                    
-                    <!-- VS Code -->
-                    <div class="floating-icon" style="--i:9; --angle:320deg;">
-                        <img src="https://icon.icepanel.io/Technology/svg/Visual-Studio-Code-%28VS-Code%29.svg" alt="VS Code" class="w-10 h-10">
-                    </div>
-                </div>
-            </div>
-        </section>
+      <!-- Freelance -->
+      <div class="exp-item reveal">
+        <div class="exp-left">
+          <div class="exp-date">Nov 2021 — May 2023</div>
+          <div class="exp-company">Freelance</div>
+          <div class="exp-loc">Remote</div>
+        </div>
+        <div class="exp-right">
+          <div class="exp-role">Android / Flutter Developer</div>
+          <ul class="exp-points">
+            <li>Collaborated with clients to translate diverse requirements into functional, budget-compliant mobile apps.</li>
+            <li>Delivered multiple projects on time while implementing new features in existing Android/Flutter apps.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-        <!-- 2. CORE COMPETENCY / ABOUT ME -->
-        <section id="about" class="container mx-auto px-6 py-20 md:py-24 scroll-reveal">
-            <h2 class="text-3xl md:text-4xl font-bold mb-10 text-center text-white">
-                The <span class="text-[#00ffb3]">One-Man Army</span> Value Proposition
-            </h2>
-            <div class="grid md:grid-cols-3 gap-8">
-                <!-- Competency Card 1 -->
-                <div class="bg-gray-800 p-8 rounded-xl shadow-xl border border-gray-700 hover:border-[#00ffb3] transition card-project">
-                    <h3 class="text-xl font-semibold text-[#00ffb3] mb-3">01. Full-Stack Product Ownership</h3>
-                    <p class="text-gray-400">
-                        I am the sole developer responsible for delivering mission-critical systems—from initial concept and database design (Mongo Atlas) to production deployment and maintenance.
-                    </p>
-                </div>
-                <!-- Competency Card 2 -->
-                <div class="bg-gray-800 p-8 rounded-xl shadow-xl border border-gray-700 hover:border-[#00ffb3] transition card-project">
-                    <h3 class="text-xl font-semibold text-[#00ffb3] mb-3">02. Cross-Platform App Expertise</h3>
-                    <p class="text-gray-400">
-                        Specializing in Flutter (Dart) for responsive, cross-platform apps (AOS, POS, Mobile) while also maintaining legacy Android (Java/Kotlin) and learning Swift/Objective C.
-                    </p>
-                </div>
-                <!-- Competency Card 3 -->
-                <div class="bg-gray-800 p-8 rounded-xl shadow-xl border border-gray-700 hover:border-[#00ffb3] transition card-project">
-                    <h3 class="text-xl font-semibold text-[#00ffb3] mb-3">03. Deployment & DevOps Readiness</h3>
-                    <p class="text-gray-400">
-                        Deep experience with API hosting on Render, and managing the entire distribution lifecycle on the Google Play Store and Apple App Store, ensuring reliability.
-                    </p>
-                </div>
-            </div>
+<!-- ══ PROJECTS ══ -->
+<section id="projects">
+  <div class="section-inner">
+    <div class="section-label">Live Applications</div>
+    <h2 class="section-title">Apps on the Stores</h2>
 
-            <div class="mt-16 text-center">
-                <a href="#" class="text-sm font-semibold text-white border-b border-white hover:text-[#00ffb3] hover:border-[#00ffb3] transition duration-300">
-                    Read the Full Professional Journey →
-                </a>
-            </div>
-        </section>
+    <div class="apps-grid">
+      <!-- GetSetFit -->
+      <a href="https://play.google.com/store/apps/details?id=com.getsetfit.gsf" target="_blank" rel="noopener" class="app-card reveal">
+        <div class="app-store-badge">▶ Play Store</div>
+        <div class="app-icon">💪</div>
+        <div class="app-name">GetSetFit</div>
+        <div class="app-desc">Fitness application managing a community of active users. Features workout tracking, community management, and fitness goal setting.</div>
+        <div class="app-tags">
+          <span class="tag">Flutter</span>
+          <span class="tag">Firebase</span>
+          <span class="tag">GetX</span>
+        </div>
+        <div class="app-users"><span>1K+</span> Active Users</div>
+      </a>
 
+      <!-- Tanami Capital -->
+      <a href="https://play.google.com/store/apps/details?id=com.tanami.app" target="_blank" rel="noopener" class="app-card reveal">
+        <div class="app-store-badge">▶ Play Store</div>
+        <div class="app-icon">🏦</div>
+        <div class="app-name">Tanami Capital</div>
+        <div class="app-desc">International finance application for Bahrain-based clients. Secure, high-performance fintech app deployed on both Play Store and Apple App Store.</div>
+        <div class="app-tags">
+          <span class="tag">Flutter</span>
+          <span class="tag">REST API</span>
+          <span class="tag">iOS + Android</span>
+        </div>
+      </a>
 
-        <!-- 3. KEY PROJECTS (Case Studies) -->
-        <section id="projects" class="container mx-auto px-6 py-20 md:py-24 scroll-reveal">
-            <h2 class="text-3xl md:text-4xl font-bold mb-4 text-white text-center">
-                Featured <span class="text-[#00ffb3]">Ecosystems</span>
-            </h2>
-            <p class="text-xl text-gray-400 text-center mb-16">
-                Three projects demonstrating full-stack ownership and commercial impact.
-            </p>
+      <!-- GetSetPrint -->
+      <a href="https://play.google.com/store/apps/details?id=com.rahul.getsetprint" target="_blank" rel="noopener" class="app-card reveal">
+        <div class="app-store-badge">▶ Play Store</div>
+        <div class="app-icon">🧾</div>
+        <div class="app-name">GetSetPrint</div>
+        <div class="app-desc">Retail billing application with inventory management, profit/loss reports, customer balance tracking and thermal/A4 printing support.</div>
+        <div class="app-tags">
+          <span class="tag">Flutter</span>
+          <span class="tag">SQLite</span>
+          <span class="tag">ESC/POS</span>
+          <span class="tag">POS Hardware</span>
+        </div>
+      </a>
 
-            <div class="grid md:grid-cols-3 gap-8">
+      <!-- Calculator Bill -->
+      <a href="https://play.google.com/store/apps/details?id=com.rahul.calculator_billhttps" target="_blank" rel="noopener" class="app-card reveal">
+        <div class="app-store-badge">▶ Play Store</div>
+        <div class="app-icon">🧮</div>
+        <div class="app-name">Calculator Bill</div>
+        <div class="app-desc">Smart billing calculator for retail operations. Streamlined for quick invoice generation and accurate billing calculations.</div>
+        <div class="app-tags">
+          <span class="tag">Flutter</span>
+          <span class="tag">Hive</span>
+        </div>
+      </a>
 
-                <!-- Project Card 1: Sales Management -->
-                <div class="card-project bg-gray-900 rounded-xl p-6 border border-gray-700 shadow-2xl">
-                    <div class="text-4xl mb-4 text-[#00ffb3]">📊</div>
-                    <h3 class="text-2xl font-bold text-white mb-3">Sales Management Platform</h3>
-                    <p class="text-gray-400 mb-4 text-sm">
-                        A complete internal ecosystem managing the order-to-delivery lifecycle for a large company.
-                    </p>
-                    <ul class="text-gray-400 space-y-2 text-sm">
-                        <li class="flex items-start"><span class="text-[#00ffb3] mr-2">✓</span> **Scope:** Order entry (Sales), Payment verification (Accounts), Dispatching (COD/Prepaid), Stock management (Stock Manager).</li>
-                        <li class="flex items-start"><span class="text-[#00ffb3] mr-2">✓</span> **Integration:** Managed multiple courier services (ShipRocket, BlueDart) for streamlined logistics.</li>
-                        <li class="flex items-start"><span class="text-[#00ffb3] mr-2">✓</span> **Tech Stack:** Node.js/Express.js (Backend), Flutter (Dialer App), MongoDB Atlas.</li>
-                    </ul>
-                </div>
+      <!-- Traders Circuit -->
+      <a href="https://play.google.com/store/apps/details?id=com.traders_circuit.app" target="_blank" rel="noopener" class="app-card reveal">
+        <div class="app-store-badge">▶ Play Store</div>
+        <div class="app-icon">📈</div>
+        <div class="app-name">Traders Circuit</div>
+        <div class="app-desc">High-performance trading and market application built for international clients. Delivered with robust state management and local caching strategies.</div>
+        <div class="app-tags">
+          <span class="tag">Flutter</span>
+          <span class="tag">BLoC</span>
+          <span class="tag">REST API</span>
+        </div>
+        <div class="app-users"><span>10K+</span> Active Users</div>
+      </a>
 
-                <!-- Project Card 2: Parking App -->
-                <div class="card-project bg-gray-900 rounded-xl p-6 border border-gray-700 shadow-2xl">
-                    <div class="text-4xl mb-4 text-[#00ffb3]">🅿️</div>
-                    <h3 class="text-2xl font-bold text-white mb-3">Smart Parking Management System</h3>
-                    <p class="text-gray-400 mb-4 text-sm">
-                        A full-stack solution for managing both fixed and dynamic (hourly) parking sites and user access.
-                    </p>
-                    <ul class="text-gray-400 space-y-2 text-sm">
-                        <li class="flex items-start"><span class="text-[#00ffb3] mr-2">✓</span> **Functionality:** Real-time parking price calculation, site allocation, and tracking.</li>
-                        <li class="flex items-start"><span class="text-[#00ffb3] mr-2">✓</span> **Users:** Separate web portals for Parking Owners, Dealers (managing multiple owners), and central Admin.</li>
-                        <li class="flex items-start"><span class="text-[#00ffb3] mr-2">✓</span> **Tech Stack:** Flutter (User App), Node.js/Express.js (API), EJS/Bootstrap (Web Portals).</li>
-                    </ul>
-                </div>
+      <!-- EasyLabel -->
+      <div class="app-card reveal" style="cursor:default;">
+        <div class="app-store-badge">▶ Play Store</div>
+        <div class="app-icon">🏷️</div>
+        <div class="app-name">EasyLabel</div>
+        <div class="app-desc">Label design and printing app featuring a custom marketplace. Supports Bluetooth, USB, and WiFi printers universally. Sole developer, production-grade system.</div>
+        <div class="app-tags">
+          <span class="tag">Android Java</span>
+          <span class="tag">MVVM</span>
+          <span class="tag">Node.js</span>
+          <span class="tag">ESC/POS</span>
+        </div>
+        <div class="app-users"><span>50K+</span> Active Users</div>
+      </div>
+    </div>
 
-                <!-- Project Card 3: GETSETPRINT Billing App -->
-                <div class="card-project bg-gray-900 rounded-xl p-6 border border-gray-700 shadow-2xl">
-                    <div class="text-4xl mb-4 text-[#00ffb3]">💳</div>
-                    <h3 class="text-2xl font-bold text-white mb-3">GETSETPRINT Retail Billing</h3>
-                    <p class="text-gray-400 mb-4 text-sm">
-                        A commercial retail billing app fully responsive for various Android POS/AOS hardware devices.
-                    </p>
-                    <ul class="text-gray-400 space-y-2 text-sm">
-                        <li class="flex items-start"><span class="text-[#00ffb3] mr-2">✓</span> **Features:** Inventory/Stock management, Profit/Loss reports, Customer balance, PDF report generation.</li>
-                        <li class="flex items-start"><span class="text-[#00ffb3] mr-2">✓</span> **Integration:** Successful integration of New Printer SR20 SDK and thermal/A4 printing capabilities.</li>
-                        <li class="flex items-start"><span class="text-[#00ffb3] mr-2">✓</span> **Web Portal:** Developed Admin Website for user/subscription management and cloud product sync.</li>
-                    </ul>
-                </div>
+    <!-- Other Projects -->
+    <div class="section-label" style="margin-bottom:1rem">Internal &amp; Enterprise</div>
+    <div class="other-projects">
+      <div class="other-card reveal">
+        <div class="other-name">Sales Management System</div>
+        <div class="other-desc">End-to-end web platform managing order-to-delivery lifecycle. Multi-role access for Sales, Accounts, Dispatch, and Stock teams. Integrated with ShipRocket and BlueDart.</div>
+      </div>
+      <div class="other-card reveal">
+        <div class="other-name">Smart Parking System</div>
+        <div class="other-desc">Full-stack parking management with real-time pricing, site allocation, and tracking. Separate portals for Parking Owners, Dealers, and Admin.</div>
+      </div>
+      <div class="other-card reveal">
+        <div class="other-name">Balaji e-Passbook</div>
+        <div class="other-desc">Financial agent app enabling offline collection with cloud sync. Built for Balaji Pigmy Collection with GPS tracking.</div>
+      </div>
+      <div class="other-card reveal">
+        <div class="other-name">CallSyncPro</div>
+        <div class="other-desc">Background Android service automating call log synchronization for sales teams into CRM systems with scheduled uploads.</div>
+      </div>
+      <div class="other-card reveal">
+        <div class="other-name">ShipSense</div>
+        <div class="other-desc">Kotlin-based logistics and parcel tracking application for order management and delivery status monitoring.</div>
+      </div>
+      <div class="other-card reveal">
+        <div class="other-name">Factory POS System</div>
+        <div class="other-desc">Flutter POS billing system integrated with Android POS hardware, custom printer drivers, and weighing scale embedded systems.</div>
+      </div>
+    </div>
+  </div>
+</section>
 
-            </div>
-        </section>
+<!-- ══ SKILLS ══ -->
+<section id="skills">
+  <div class="section-inner">
+    <div class="section-label">Technical Expertise</div>
+    <h2 class="section-title">Skills</h2>
 
-        <!-- 4. SKILLS GRID -->
-        <section id="skills" class="container mx-auto px-6 py-20 md:py-24 scroll-reveal">
-            <h2 class="text-3xl md:text-4xl font-bold mb-4 text-white text-center">
-                My <span class="text-[#00ffb3]">Technical Stack</span>
-            </h2>
-            <p class="text-xl text-gray-400 text-center mb-12">
-                Proficient across the full technology spectrum, enabling true product ownership.
-            </p>
-        
-            <div class="max-w-4xl mx-auto bg-gray-800 p-8 rounded-xl shadow-2xl border border-gray-700">
-                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 text-center">
-                    
-                    <!-- Skill Item: Flutter -->
-                    <div class="p-3 bg-gray-700 rounded-lg hover:bg-[#00ffb3]/20 transition transform hover:scale-105">
-                        <p class="text-white font-bold">Flutter (Dart)</p>
-                        <p class="text-sm text-[#00ffb3]">Mobile Expert</p>
-                    </div>
-                    
-                    <!-- Skill Item: Node.js -->
-                    <div class="p-3 bg-gray-700 rounded-lg hover:bg-[#00ffb3]/20 transition transform hover:scale-105">
-                        <p class="text-white font-bold">Node.js / Express.js</p>
-                        <p class="text-sm text-[#00ffb3]">Backend API</p>
-                    </div>
-        
-                    <!-- Skill Item: UI/UX -->
-                    <div class="p-3 bg-gray-700 rounded-lg hover:bg-[#00ffb3]/20 transition transform hover:scale-105">
-                        <p class="text-white font-bold">UI/UX Design</p>
-                        <p class="text-sm text-[#00ffb3]">Figma / Prototyping</p>
-                    </div>
-                    
-                    <!-- Skill Item: Hosting -->
-                    <div class="p-3 bg-gray-700 rounded-lg hover:bg-[#00ffb3]/20 transition transform hover:scale-105">
-                        <p class="text-white font-bold">Render / Cloud</p>
-                        <p class="text-sm text-[#00ffb3]">DevOps & Hosting</p>
-                    </div>
-        
-                    <!-- Skill Item: Android -->
-                    <div class="p-3 bg-gray-700 rounded-lg hover:bg-[#00ffb3]/20 transition transform hover:scale-105">
-                        <p class="text-white font-bold">Java / Kotlin</p>
-                        <p class="text-sm text-[#00ffb3]">Android Native</p>
-                    </div>
-        
-                    <!-- Skill Item: Frontend -->
-                    <div class="p-3 bg-gray-700 rounded-lg hover:bg-[#00ffb3]/20 transition transform hover:scale-105">
-                        <p class="text-white font-bold">HTML / CSS / JS</p>
-                        <p class="text-sm text-[#00ffb3]">Bootstrap / EJS</p>
-                    </div>
-        
-                    <!-- Skill Item: Databases -->
-                    <div class="p-3 bg-gray-700 rounded-lg hover:bg-[#00ffb3]/20 transition transform hover:scale-105">
-                        <p class="text-white font-bold">Mongo Atlas / Firebase</p>
-                        <p class="text-sm text-[#00ffb3]">Database Mgmt</p>
-                    </div>
-                    
-                    <!-- Skill Item: Next.js -->
-                    <div class="p-3 bg-gray-700 rounded-lg hover:bg-[#00ffb3]/20 transition transform hover:scale-105">
-                        <p class="text-white font-bold">Next.js</p>
-                        <p class="text-sm text-[#00ffb3]">Learning/New Tech</p>
-                    </div>
-        
-                </div>
-            </div>
-        </section>
-        
-        <!-- NEW: SKILLS ICONS GRID -->
-        <section id="skills-icons" class="container mx-auto px-6 py-12 md:py-16 scroll-reveal">
-            <h2 class="text-2xl md:text-3xl font-bold mb-8 text-white text-center">
-                Technologies & Tools I Work With
-            </h2>
-            
-            <div class="max-w-6xl mx-auto bg-gray-800 p-8 rounded-xl shadow-2xl border border-gray-700">
-                <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-6 text-center">
-                    
-                    <!-- Android -->
-                    <div class="p-4 bg-gray-700 rounded-lg hover:bg-[#00ffb3]/20 transition transform hover:scale-105 flex flex-col items-center">
-                        <img src="https://icon.icepanel.io/Technology/svg/Android.svg" alt="Android" class="w-12 h-12 mb-2">
-                        <p class="text-white text-sm font-medium">Android</p>
-                    </div>
-                    
-                    <!-- Android Studio -->
-                    <div class="p-4 bg-gray-700 rounded-lg hover:bg-[#00ffb3]/20 transition transform hover:scale-105 flex flex-col items-center">
-                        <img src="https://icon.icepanel.io/Technology/svg/Android-Studio.svg" alt="Android Studio" class="w-12 h-12 mb-2">
-                        <p class="text-white text-sm font-medium">Android Studio</p>
-                    </div>
-                    
-                    <!-- Dart -->
-                    <div class="p-4 bg-gray-700 rounded-lg hover:bg-[#00ffb3]/20 transition transform hover:scale-105 flex flex-col items-center">
-                        <img src="https://icon.icepanel.io/Technology/svg/Dart.svg" alt="Dart" class="w-12 h-12 mb-2">
-                        <p class="text-white text-sm font-medium">Dart</p>
-                    </div>
-                    
-                    <!-- Flutter -->
-                    <div class="p-4 bg-gray-700 rounded-lg hover:bg-[#00ffb3]/20 transition transform hover:scale-105 flex flex-col items-center">
-                        <img src="https://icon.icepanel.io/Technology/svg/Flutter.svg" alt="Flutter" class="w-12 h-12 mb-2">
-                        <p class="text-white text-sm font-medium">Flutter</p>
-                    </div>
-                    
-                    <!-- Node.js -->
-                    <div class="p-4 bg-gray-700 rounded-lg hover:bg-[#00ffb3]/20 transition transform hover:scale-105 flex flex-col items-center">
-                        <img src="https://icon.icepanel.io/Technology/svg/Node.js.svg" alt="Node.js" class="w-12 h-12 mb-2">
-                        <p class="text-white text-sm font-medium">Node.js</p>
-                    </div>
-                    
-                    <!-- Express -->
-                    <div class="p-4 bg-gray-700 rounded-lg hover:bg-[#00ffb3]/20 transition transform hover:scale-105 flex flex-col items-center">
-                        <img src="https://icon.icepanel.io/Technology/svg/Express.svg" alt="Express" class="w-12 h-12 mb-2">
-                        <p class="text-white text-sm font-medium">Express</p>
-                    </div>
-                    
-                    <!-- MongoDB -->
-                    <div class="p-4 bg-gray-700 rounded-lg hover:bg-[#00ffb3]/20 transition transform hover:scale-105 flex flex-col items-center">
-                        <img src="https://icon.icepanel.io/Technology/svg/MongoDB.svg" alt="MongoDB" class="w-12 h-12 mb-2">
-                        <p class="text-white text-sm font-medium">MongoDB</p>
-                    </div>
-                    
-                    <!-- JavaScript -->
-                    <div class="p-4 bg-gray-700 rounded-lg hover:bg-[#00ffb3]/20 transition transform hover:scale-105 flex flex-col items-center">
-                        <img src="https://icon.icepanel.io/Technology/svg/JavaScript.svg" alt="JavaScript" class="w-12 h-12 mb-2">
-                        <p class="text-white text-sm font-medium">JavaScript</p>
-                    </div>
-                    
-                    <!-- TypeScript -->
-                    <div class="p-4 bg-gray-700 rounded-lg hover:bg-[#00ffb3]/20 transition transform hover:scale-105 flex flex-col items-center">
-                        <img src="https://icon.icepanel.io/Technology/svg/TypeScript.svg" alt="TypeScript" class="w-12 h-12 mb-2">
-                        <p class="text-white text-sm font-medium">TypeScript</p>
-                    </div>
-                    
-                    <!-- HTML5 -->
-                    <div class="p-4 bg-gray-700 rounded-lg hover:bg-[#00ffb3]/20 transition transform hover:scale-105 flex flex-col items-center">
-                        <img src="https://icon.icepanel.io/Technology/svg/HTML5.svg" alt="HTML5" class="w-12 h-12 mb-2">
-                        <p class="text-white text-sm font-medium">HTML5</p>
-                    </div>
-                    
-                    <!-- CSS3 -->
-                    <div class="p-4 bg-gray-700 rounded-lg hover:bg-[#00ffb3]/20 transition transform hover:scale-105 flex flex-col items-center">
-                        <img src="https://icon.icepanel.io/Technology/svg/CSS3.svg" alt="CSS3" class="w-12 h-12 mb-2">
-                        <p class="text-white text-sm font-medium">CSS3</p>
-                    </div>
-                    
-                    <!-- Java -->
-                    <div class="p-4 bg-gray-700 rounded-lg hover:bg-[#00ffb3]/20 transition transform hover:scale-105 flex flex-col items-center">
-                        <img src="https://icon.icepanel.io/Technology/svg/Java.svg" alt="Java" class="w-12 h-12 mb-2">
-                        <p class="text-white text-sm font-medium">Java</p>
-                    </div>
-                    
-                    <!-- Kotlin -->
-                    <div class="p-4 bg-gray-700 rounded-lg hover:bg-[#00ffb3]/20 transition transform hover:scale-105 flex flex-col items-center">
-                        <img src="https://icon.icepanel.io/Technology/svg/Kotlin.svg" alt="Kotlin" class="w-12 h-12 mb-2">
-                        <p class="text-white text-sm font-medium">Kotlin</p>
-                    </div>
-                    
-                    <!-- Next.js -->
-                    <div class="p-4 bg-gray-700 rounded-lg hover:bg-[#00ffb3]/20 transition transform hover:scale-105 flex flex-col items-center">
-                        <img src="https://icon.icepanel.io/Technology/svg/Next.js.svg" alt="Next.js" class="w-12 h-12 mb-2">
-                        <p class="text-white text-sm font-medium">Next.js</p>
-                    </div>
-                    
-                    <!-- React -->
-                    <div class="p-4 bg-gray-700 rounded-lg hover:bg-[#00ffb3]/20 transition transform hover:scale-105 flex flex-col items-center">
-                        <img src="https://icon.icepanel.io/Technology/svg/React.svg" alt="React" class="w-12 h-12 mb-2">
-                        <p class="text-white text-sm font-medium">React</p>
-                    </div>
-                    
-                    <!-- Git -->
-                    <div class="p-4 bg-gray-700 rounded-lg hover:bg-[#00ffb3]/20 transition transform hover:scale-105 flex flex-col items-center">
-                        <img src="https://icon.icepanel.io/Technology/svg/Git.svg" alt="Git" class="w-12 h-12 mb-2">
-                        <p class="text-white text-sm font-medium">Git</p>
-                    </div>
-                    
-                    <!-- GitHub -->
-                    <div class="p-4 bg-gray-700 rounded-lg hover:bg-[#00ffb3]/20 transition transform hover:scale-105 flex flex-col items-center">
-                        <img src="https://icon.icepanel.io/Technology/svg/GitHub.svg" alt="GitHub" class="w-12 h-12 mb-2">
-                        <p class="text-white text-sm font-medium">GitHub</p>
-                    </div>
-                    
-                    <!-- Figma -->
-                    <div class="p-4 bg-gray-700 rounded-lg hover:bg-[#00ffb3]/20 transition transform hover:scale-105 flex flex-col items-center">
-                        <img src="https://icon.icepanel.io/Technology/svg/Figma.svg" alt="Figma" class="w-12 h-12 mb-2">
-                        <p class="text-white text-sm font-medium">Figma</p>
-                    </div>
-                    
-                    <!-- VS Code -->
-                    <div class="p-4 bg-gray-700 rounded-lg hover:bg-[#00ffb3]/20 transition transform hover:scale-105 flex flex-col items-center">
-                        <img src="https://icon.icepanel.io/Technology/svg/Visual-Studio-Code-%28VS-Code%29.svg" alt="VS Code" class="w-12 h-12 mb-2">
-                        <p class="text-white text-sm font-medium">VS Code</p>
-                    </div>
-                    
-                    <!-- Postman -->
-                    <div class="p-4 bg-gray-700 rounded-lg hover:bg-[#00ffb3]/20 transition transform hover:scale-105 flex flex-col items-center">
-                        <img src="https://icon.icepanel.io/Technology/svg/Postman.svg" alt="Postman" class="w-12 h-12 mb-2">
-                        <p class="text-white text-sm font-medium">Postman</p>
-                    </div>
-                    
-                    <!-- MySQL -->
-                    <div class="p-4 bg-gray-700 rounded-lg hover:bg-[#00ffb3]/20 transition transform hover:scale-105 flex flex-col items-center">
-                        <img src="https://icon.icepanel.io/Technology/svg/MySQL.svg" alt="MySQL" class="w-12 h-12 mb-2">
-                        <p class="text-white text-sm font-medium">MySQL</p>
-                    </div>
-                    
-                    <!-- SQLite -->
-                    <div class="p-4 bg-gray-700 rounded-lg hover:bg-[#00ffb3]/20 transition transform hover:scale-105 flex flex-col items-center">
-                        <img src="https://icon.icepanel.io/Technology/svg/SQLite.svg" alt="SQLite" class="w-12 h-12 mb-2">
-                        <p class="text-white text-sm font-medium">SQLite</p>
-                    </div>
-                    
-                    <!-- NPM -->
-                    <div class="p-4 bg-gray-700 rounded-lg hover:bg-[#00ffb3]/20 transition transform hover:scale-105 flex flex-col items-center">
-                        <img src="https://icon.icepanel.io/Technology/svg/NPM.svg" alt="NPM" class="w-12 h-12 mb-2">
-                        <p class="text-white text-sm font-medium">NPM</p>
-                    </div>
-                    
-                    <!-- Linux -->
-                    <div class="p-4 bg-gray-700 rounded-lg hover:bg-[#00ffb3]/20 transition transform hover:scale-105 flex flex-col items-center">
-                        <img src="https://icon.icepanel.io/Technology/svg/Linux.svg" alt="Linux" class="w-12 h-12 mb-2">
-                        <p class="text-white text-sm font-medium">Linux</p>
-                    </div>
-                    
-                    <!-- Jira -->
-                    <div class="p-4 bg-gray-700 rounded-lg hover:bg-[#00ffb3]/20 transition transform hover:scale-105 flex flex-col items-center">
-                        <img src="https://icon.icepanel.io/Technology/svg/Jira.svg" alt="Jira" class="w-12 h-12 mb-2">
-                        <p class="text-white text-sm font-medium">Jira</p>
-                    </div>
-                    
-                    <!-- Swift -->
-                    <div class="p-4 bg-gray-700 rounded-lg hover:bg-[#00ffb3]/20 transition transform hover:scale-105 flex flex-col items-center">
-                        <img src="https://icon.icepanel.io/Technology/svg/Swift.svg" alt="Swift" class="w-12 h-12 mb-2">
-                        <p class="text-white text-sm font-medium">Swift</p>
-                    </div>
-                    
-                    <!-- Objective-C -->
-                    <div class="p-4 bg-gray-700 rounded-lg hover:bg-[#00ffb3]/20 transition transform hover:scale-105 flex flex-col items-center">
-                        <img src="https://icon.icepanel.io/Technology/svg/Objective-C.svg" alt="Objective-C" class="w-12 h-12 mb-2">
-                        <p class="text-white text-sm font-medium">Objective-C</p>
-                    </div>
-                    
-                    <!-- Xcode -->
-                    <div class="p-4 bg-gray-700 rounded-lg hover:bg-[#00ffb3]/20 transition transform hover:scale-105 flex flex-col items-center">
-                        <img src="https://icon.icepanel.io/Technology/svg/Xcode.svg" alt="Xcode" class="w-12 h-12 mb-2">
-                        <p class="text-white text-sm font-medium">Xcode</p>
-                    </div>
-                    
-                    <!-- Apple -->
-                    <div class="p-4 bg-gray-700 rounded-lg hover:bg-[#00ffb3]/20 transition transform hover:scale-105 flex flex-col items-center">
-                        <img src="https://icon.icepanel.io/Technology/svg/Apple.svg" alt="Apple" class="w-12 h-12 mb-2">
-                        <p class="text-white text-sm font-medium">Apple</p>
-                    </div>
-                    
-                    <!-- Google -->
-                    <div class="p-4 bg-gray-700 rounded-lg hover:bg-[#00ffb3]/20 transition transform hover:scale-105 flex flex-col items-center">
-                        <img src="https://icon.icepanel.io/Technology/svg/Google.svg" alt="Google" class="w-12 h-12 mb-2">
-                        <p class="text-white text-sm font-medium">Google</p>
-                    </div>
-                    
-                    <!-- C++ -->
-                    <div class="p-4 bg-gray-700 rounded-lg hover:bg-[#00ffb3]/20 transition transform hover:scale-105 flex flex-col items-center">
-                        <img src="https://icon.icepanel.io/Technology/svg/C%2B%2B-%28CPlusPlus%29.svg" alt="C++" class="w-12 h-12 mb-2">
-                        <p class="text-white text-sm font-medium">C++</p>
-                    </div>
-                    
-                    <!-- PHP -->
-                    <div class="p-4 bg-gray-700 rounded-lg hover:bg-[#00ffb3]/20 transition transform hover:scale-105 flex flex-col items-center">
-                        <img src="https://icon.icepanel.io/Technology/svg/PHP.svg" alt="PHP" class="w-12 h-12 mb-2">
-                        <p class="text-white text-sm font-medium">PHP</p>
-                    </div>
-                    
-                    <!-- JSON -->
-                    <div class="p-4 bg-gray-700 rounded-lg hover:bg-[#00ffb3]/20 transition transform hover:scale-105 flex flex-col items-center">
-                        <img src="https://icon.icepanel.io/Technology/svg/JSON.svg" alt="JSON" class="w-12 h-12 mb-2">
-                        <p class="text-white text-sm font-medium">JSON</p>
-                    </div>
-                    
-                    <!-- Gradle -->
-                    <div class="p-4 bg-gray-700 rounded-lg hover:bg-[#00ffb3]/20 transition transform hover:scale-105 flex flex-col items-center">
-                        <img src="https://icon.icepanel.io/Technology/svg/Gradle.svg" alt="Gradle" class="w-12 h-12 mb-2">
-                        <p class="text-white text-sm font-medium">Gradle</p>
-                    </div>
-                    
-                    <!-- Qt Framework -->
-                    <div class="p-4 bg-gray-700 rounded-lg hover:bg-[#00ffb3]/20 transition transform hover:scale-105 flex flex-col items-center">
-                        <img src="https://icon.icepanel.io/Technology/svg/Qt-Framework.svg" alt="Qt Framework" class="w-12 h-12 mb-2">
-                        <p class="text-white text-sm font-medium">Qt Framework</p>
-                    </div>
-                    
-                    <!-- Jupyter -->
-                    <div class="p-4 bg-gray-700 rounded-lg hover:bg-[#00ffb3]/20 transition transform hover:scale-105 flex flex-col items-center">
-                        <img src="https://icon.icepanel.io/Technology/svg/Jupyter.svg" alt="Jupyter" class="w-12 h-12 mb-2">
-                        <p class="text-white text-sm font-medium">Jupyter</p>
-                    </div>
-                    
-                    <!-- Kaggle -->
-                    <div class="p-4 bg-gray-700 rounded-lg hover:bg-[#00ffb3]/20 transition transform hover:scale-105 flex flex-col items-center">
-                        <img src="https://icon.icepanel.io/Technology/svg/Kaggle.svg" alt="Kaggle" class="w-12 h-12 mb-2">
-                        <p class="text-white text-sm font-medium">Kaggle</p>
-                    </div>
-                    
-                    <!-- SQL Developer -->
-                    <div class="p-4 bg-gray-700 rounded-lg hover:bg-[#00ffb3]/20 transition transform hover:scale-105 flex flex-col items-center">
-                        <img src="https://icon.icepanel.io/Technology/svg/SQL-Developer.svg" alt="SQL Developer" class="w-12 h-12 mb-2">
-                        <p class="text-white text-sm font-medium">SQL Developer</p>
-                    </div>
-                    
-                    <!-- AngularJS -->
-                    <div class="p-4 bg-gray-700 rounded-lg hover:bg-[#00ffb3]/20 transition transform hover:scale-105 flex flex-col items-center">
-                        <img src="https://icon.icepanel.io/Technology/svg/AngularJS.svg" alt="AngularJS" class="w-12 h-12 mb-2">
-                        <p class="text-white text-sm font-medium">AngularJS</p>
-                    </div>
-                    
-                </div>
-            </div>
-        </section>
+    <div class="skills-grid">
+      <div class="skill-group reveal">
+        <div class="skill-group-title">Mobile Development</div>
+        <ul class="skill-list">
+          <li>Flutter / Dart <span class="skill-dot"></span></li>
+          <li>Android (Java) <span class="skill-dot"></span></li>
+          <li>Kotlin <span class="skill-dot mid"></span></li>
+          <li>iOS / XCode <span class="skill-dot mid"></span></li>
+        </ul>
+      </div>
+      <div class="skill-group reveal">
+        <div class="skill-group-title">State Management</div>
+        <ul class="skill-list">
+          <li>BLoC <span class="skill-dot"></span></li>
+          <li>GetX <span class="skill-dot"></span></li>
+          <li>Provider <span class="skill-dot mid"></span></li>
+          <li>MVVM / MVC / MVP <span class="skill-dot"></span></li>
+        </ul>
+      </div>
+      <div class="skill-group reveal">
+        <div class="skill-group-title">Backend &amp; Web</div>
+        <ul class="skill-list">
+          <li>Node.js / Express.js <span class="skill-dot"></span></li>
+          <li>REST APIs / JWT <span class="skill-dot"></span></li>
+          <li>React JS <span class="skill-dot mid"></span></li>
+          <li>EJS / Tailwind <span class="skill-dot mid"></span></li>
+        </ul>
+      </div>
+      <div class="skill-group reveal">
+        <div class="skill-group-title">Databases</div>
+        <ul class="skill-list">
+          <li>MongoDB / Atlas <span class="skill-dot"></span></li>
+          <li>PostgreSQL <span class="skill-dot mid"></span></li>
+          <li>SQLite / Room / Hive <span class="skill-dot"></span></li>
+          <li>Firebase Realtime DB <span class="skill-dot"></span></li>
+        </ul>
+      </div>
+      <div class="skill-group reveal">
+        <div class="skill-group-title">Architecture</div>
+        <ul class="skill-list">
+          <li>Clean Architecture <span class="skill-dot"></span></li>
+          <li>Modular Monoliths <span class="skill-dot mid"></span></li>
+          <li>RBAC Systems <span class="skill-dot mid"></span></li>
+          <li>Offline-First Design <span class="skill-dot"></span></li>
+        </ul>
+      </div>
+      <div class="skill-group reveal">
+        <div class="skill-group-title">Hardware / Integrations</div>
+        <ul class="skill-list">
+          <li>ESC/POS Printing <span class="skill-dot"></span></li>
+          <li>BT / USB / WiFi Printers <span class="skill-dot"></span></li>
+          <li>Weighing Scale APIs <span class="skill-dot mid"></span></li>
+          <li>FCM / OneSignal <span class="skill-dot"></span></li>
+        </ul>
+      </div>
+    </div>
 
-        <!-- 5. CONTACT / CTA FOOTER -->
-        <section id="contact" class="bg-gray-900 py-16 scroll-reveal">
-            <div class="container mx-auto px-6 text-center">
-                <h2 class="text-3xl font-bold text-white mb-4">Ready to Build Something Great?</h2>
-                <p class="text-xl text-gray-400 mb-8 max-w-2xl mx-auto">
-                    If you need a reliable product engineer who can take a project from concept to launch, let's connect.
-                </p>
-                
-                <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6">
-                    <a href="mailto:rahulwaghmare751@gmail.com" class="bg-[#00ffb3] text-gray-900 px-8 py-3 font-bold rounded-xl hover:bg-white transition duration-300 shadow-xl">
-                        Send Me an Email
-                    </a>
-                    <a href="https://www.linkedin.com/in/rahul-waghmare-3a3217212" target="_blank" class="border border-gray-600 text-white px-8 py-3 font-semibold rounded-xl hover:bg-gray-700 transition duration-300">
-                        Connect on LinkedIn
-                    </a>
-                </div>
+    <div class="tech-strip reveal">
 
-                <div class="mt-12 pt-8 border-t border-gray-700 text-sm text-gray-500">
-                    <p>&copy; <span id="currentYear"></span> Rahul Waghmare. All rights reserved.</p>
-                </div>
+      <!-- Flutter -->
+      <div class="tech-item">
+        <svg width="28" height="28" viewBox="0 0 256 317" xmlns="http://www.w3.org/2000/svg">
+          <path d="M157.666 0L0 157.667l48.8 48.8L255.267 0z" fill="#54C5F8"/>
+          <path d="M157.666 0L54.933 102.733l48.8 48.8L255.267 0z" fill="#01579B"/>
+          <path d="M103.733 206.467l48.8 48.8 102.734-102.733-48.8-48.8z" fill="#54C5F8"/>
+          <path d="M103.733 206.467l24.4 24.4 78.334-78.333-24.4-24.4z" fill="#29B6F6"/>
+          <path d="M152.533 255.267l-48.8-48.8-48.8 48.8 48.8 48.8z" fill="#01579B"/>
+          <path d="M103.733 304.067l48.8-48.8-24.4-24.4-24.4 24.4z" fill="#00B0FF"/>
+        </svg>
+        Flutter
+      </div>
 
-            </div>
-        </section>
+      <!-- Dart -->
+      <div class="tech-item">
+        <svg width="28" height="28" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg">
+          <path d="M58.2 210.5L18 170.3c-6-6-6-15.7 0-21.7L127.5 39l43.7 43.7L58.2 210.5z" fill="#01579B"/>
+          <path d="M18 170.3l40.2 40.2 113-113L128 54.3 18 170.3z" fill="#40C4FF"/>
+          <path d="M128 54.3l43.2-43.2c6-6 15.7-6 21.7 0l40.3 40.3c6 6 6 15.7 0 21.7L171.2 125l-43.2-43.2V54.3z" fill="#01579B"/>
+          <path d="M171.2 125L128 81.8l-43.2 43.2 43.2 43.2 43.2-43.2z" fill="#40C4FF"/>
+          <path d="M128 168.2l43.2 43.2-43.2 43.2-43.2-43.2 43.2-43.2z" fill="#01579B"/>
+        </svg>
+        Dart
+      </div>
 
-    </main>
+      <!-- Android -->
+      <div class="tech-item">
+        <svg width="28" height="28" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+          <path d="M8 12h16v10a2 2 0 01-2 2h-1v3a1.5 1.5 0 01-3 0v-3h-4v3a1.5 1.5 0 01-3 0v-3H9a2 2 0 01-2-2V12h1zm-3 0a1.5 1.5 0 013 0v6a1.5 1.5 0 01-3 0V12zm22 0a1.5 1.5 0 013 0v6a1.5 1.5 0 01-3 0V12zM11.2 4.6l-2-2.4a.4.4 0 01.6-.5l2.2 2.6A9 9 0 0116 3.5c1.5 0 3 .4 4.2 1l2.1-2.6a.4.4 0 01.6.5l-2 2.4A8.5 8.5 0 0124 10H8a8.5 8.5 0 013.2-5.4zM13 7.5a1 1 0 100-2 1 1 0 000 2zm6 0a1 1 0 100-2 1 1 0 000 2z" fill="#3DDC84"/>
+        </svg>
+        Android
+      </div>
 
-    <script>
-        // Get current year for footer
-        document.getElementById('currentYear').textContent = new Date().getFullYear();
+      <!-- Kotlin -->
+      <div class="tech-item">
+        <svg width="28" height="28" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="kg1" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#E44857"/>
+              <stop offset="50%" stop-color="#C711E1"/>
+              <stop offset="100%" stop-color="#7F52FF"/>
+            </linearGradient>
+          </defs>
+          <path d="M3 3h26L16 16 29 29H3V3z" fill="url(#kg1)"/>
+        </svg>
+        Kotlin
+      </div>
 
-        // JavaScript for Scroll Reveal Animation
-        const elements = document.querySelectorAll('.scroll-reveal');
-        
-        const observer = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    observer.unobserve(entry.target); // Stop observing once visible
-                }
-            });
-        }, {
-            // Options: Start loading slightly before entering viewport
-            rootMargin: '0px',
-            threshold: 0.1 
-        });
+      <!-- Java -->
+      <div class="tech-item">
+        <svg width="28" height="28" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12.2 22.4s-1.3.8.9 1c2.7.3 4-.3 6.9-.7 0 0 .8.5 1.8.9-6.4 2.7-14.5-.2-9.6-1.2zm-.8-3.5s-1.4 1 .8 1.2c2.8.3 5 .3 8.9-.4 0 0 .5.5 1.4.8-7.9 2.3-16.7.2-11.1-1.6zm14.8 6.1s.9.8-.9 1.4c-3.4 1-14.2 1.3-17.2 0-1.1-.5.9-1.1 1.5-1.2.6-.1 1 0 1 0-1.1-.8-7.4 1.6-3.2 2.3 11.5 1.9 21-1 18.8-2.5zm-9.8-12.7s-3.7.9-1.3 1.2c1 .1 3 .1 4.8 0 1.5-.1 3-.4 3-.4s-.5.2-1 .5c-3.8 1-11.1.5-9-.5 1.8-.8 3.5-.8 3.5-.8zm6.5 3.6c3.9-2 2.1-4 .8-3.7-.3.1-.5.2-.5.2s.1-.2.4-.3c3.1-1.1 5.4 3.2-1 4.9 0-.1.2-.2.3-1.1zm-5.3-9.7c0 0 2.1 2.1-.2 4.3-1.8 1.7-.4 2.7 0 3.8-1.3-1.1-2.2-2.1-1.6-3.1.9-1.4 3.6-2.1 1.8-5zm-1.5 10.6c3.7.5.5 3.3.5 3.3s.9-1.5-1.8-2.5c0 0-2.9.3-5.7 1.5 0 0 1.5-1.5 7-2.3z" fill="#E76F00"/>
+          <path d="M15.5 2c0 0 3.2 3.2-3 8.1-4.9 3.9-1.1 6.1 0 8.6-2.9-2.6-5-4.9-3.6-7 2-3.2 7.5-4.7 6.6-9.7z" fill="#E76F00"/>
+        </svg>
+        Java
+      </div>
 
-        elements.forEach(el => {
-            observer.observe(el);
-        });
-    </script>
+      <!-- Node.js -->
+      <div class="tech-item">
+        <svg width="28" height="28" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+          <path d="M16 2l13 7.5v15L16 30 3 24.5v-15L16 2z" fill="#339933"/>
+          <path d="M16 5l10.5 6v12L16 27l-10.5-4V11L16 5z" fill="#fff" opacity=".1"/>
+          <path d="M16 9a1.5 1.5 0 011.5 1.5v6.5a1 1 0 001 1h1a1 1 0 000-2h-.5V10.5a3 3 0 00-6 0v.5h1.5v-.5A1.5 1.5 0 0116 9zm-4 7h-1a1 1 0 000 2h.5c.3 1.5 1.6 2.5 3 2.5h3a2.5 2.5 0 000-5h-3a1 1 0 000 2h3a.5.5 0 010 1h-3c-.8 0-1.5-.7-1.5-1.5H12a1 1 0 00-1-1h1z" fill="#fff"/>
+        </svg>
+        Node.js
+      </div>
+
+      <!-- Express -->
+      <div class="tech-item">
+        <svg width="28" height="28" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+          <rect width="32" height="32" rx="4" fill="#353535"/>
+          <text x="4" y="22" font-family="monospace" font-size="14" font-weight="bold" fill="#fff">Ex</text>
+        </svg>
+        Express
+      </div>
+
+      <!-- MongoDB -->
+      <div class="tech-item">
+        <svg width="28" height="28" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+          <path d="M16 2c-5 7-7 11-7 14a7 7 0 0014 0c0-3-2-7-7-14z" fill="#10AA50"/>
+          <path d="M16 2c0 0 4 7 4 14a4.1 4.1 0 01-4 4V2z" fill="#B8C4BB"/>
+          <path d="M16 30V20a4.1 4.1 0 004-4c0-7-4-14-4-14v28z" fill="#12924F"/>
+        </svg>
+        MongoDB
+      </div>
+
+      <!-- React -->
+      <div class="tech-item">
+        <svg width="28" height="28" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="16" cy="16" r="2.5" fill="#61DAFB"/>
+          <ellipse cx="16" cy="16" rx="14" ry="5.5" fill="none" stroke="#61DAFB" stroke-width="1.5"/>
+          <ellipse cx="16" cy="16" rx="14" ry="5.5" fill="none" stroke="#61DAFB" stroke-width="1.5" transform="rotate(60 16 16)"/>
+          <ellipse cx="16" cy="16" rx="14" ry="5.5" fill="none" stroke="#61DAFB" stroke-width="1.5" transform="rotate(120 16 16)"/>
+        </svg>
+        React
+      </div>
+
+      <!-- JavaScript -->
+      <div class="tech-item">
+        <svg width="28" height="28" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+          <rect width="32" height="32" fill="#F7DF1E"/>
+          <path d="M9 25.5l2.3-1.4c.4.8.8 1.4 1.7 1.4.9 0 1.4-.4 1.4-1.8V16h2.8v7.8c0 2.9-1.7 4.2-4.2 4.2-2.2 0-3.5-1.2-4-2.5zm9.5-.3l2.3-1.4c.6 1 1.4 1.7 2.7 1.7 1.1 0 1.9-.6 1.9-1.4 0-.9-.7-1.3-2-1.8l-.7-.3c-2-.8-3.2-1.9-3.2-4 0-2 1.5-3.5 3.9-3.5 1.7 0 2.9.6 3.7 2.1L25.3 18c-.5-.8-1-1.2-1.8-1.2s-1.2.5-1.2 1.1c0 .8.5 1.1 1.6 1.6l.7.3c2.3 1 3.5 2.1 3.5 4.2 0 2.4-1.9 3.7-4.4 3.7-2.5 0-4-.9-4.9-2.5z" fill="#000"/>
+        </svg>
+        JavaScript
+      </div>
+
+      <!-- Figma -->
+      <div class="tech-item">
+        <svg width="28" height="28" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+          <rect x="9" y="3" width="7" height="7" rx="3.5" fill="#F24E1E"/>
+          <rect x="16" y="3" width="7" height="7" rx="3.5" fill="#FF7262"/>
+          <rect x="9" y="10" width="7" height="7" fill="#A259FF"/>
+          <rect x="9" y="17" width="7" height="7" rx="3.5" fill="#0ACF83"/>
+          <circle cx="19.5" cy="16" r="3.5" fill="#1ABCFE"/>
+        </svg>
+        Figma
+      </div>
+
+      <!-- Git -->
+      <div class="tech-item">
+        <svg width="28" height="28" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+          <path d="M30.2 14.8L17.2 1.8a2.7 2.7 0 00-3.8 0L10.6 4.6l3.5 3.5a3.2 3.2 0 013.3.8 3.2 3.2 0 01.8 3.3l3.3 3.3a3.2 3.2 0 014.1 4.1 3.2 3.2 0 01-4.3 4.3 3.2 3.2 0 01-.7-3.5l-3.1-3.1v8.1a3.2 3.2 0 11-3.7-.5V14.8a3.2 3.2 0 01-1.7-4.2L8.8 7.1l-7 7a2.7 2.7 0 000 3.8l13 13a2.7 2.7 0 003.8 0l11.6-11.6a2.7 2.7 0 000-3.5z" fill="#F05032"/>
+        </svg>
+        Git
+      </div>
+
+      <!-- Postman -->
+      <div class="tech-item">
+        <svg width="28" height="28" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="16" cy="16" r="14" fill="#FF6C37"/>
+          <path d="M16 8a8 8 0 11-5.7 13.7l7-7A5.5 5.5 0 1016 8z" fill="#fff"/>
+          <path d="M11.8 19.8l-2.2 2.2a8 8 0 001.3 1.2l2.2-2.2-1.3-1.2zm1.7 1.7l-2.2 2.1.9.7 2.1-2.1-.8-.7z" fill="#fff" opacity=".7"/>
+        </svg>
+        Postman
+      </div>
+
+      <!-- SQLite -->
+      <div class="tech-item">
+        <svg width="28" height="28" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+          <path d="M28 5c-2-3-5-4-8-3C17 3 15 5 14 8c-1 3 0 6 2 8l-9 14h3l3-5h7l1 5h3L20 16c3-1 5-4 6-7 1-2 2-4 2-4zM13 23l3-5 2 5h-5zm4-8c-2-2-2-5-1-7 1-2 3-3 5-3 2 1 3 3 3 5s-1 4-3 5c0 0-2 0-4 0z" fill="#003B57"/>
+          <path d="M20 10c0 2-1 4-3 4s-3-2-3-4 1-4 3-4 3 2 3 4z" fill="#0F80CC"/>
+        </svg>
+        SQLite
+      </div>
+
+      <!-- JIRA -->
+      <div class="tech-item">
+        <svg width="28" height="28" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="jg1" x1="100%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#2684FF"/>
+              <stop offset="100%" stop-color="#0052CC"/>
+            </linearGradient>
+            <linearGradient id="jg2" x1="0%" y1="100%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#0052CC"/>
+              <stop offset="100%" stop-color="#2684FF"/>
+            </linearGradient>
+          </defs>
+          <path d="M16.3 2L3 15.3l6 6 7.3-7.3 7.3 7.3 6-6L16.3 2z" fill="url(#jg1)"/>
+          <path d="M16.3 16l-7.3 7.3 7.3 7.3 7.3-7.3-7.3-7.3z" fill="url(#jg2)"/>
+        </svg>
+        JIRA
+      </div>
+
+      <!-- Xcode -->
+      <div class="tech-item">
+        <svg width="28" height="28" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="xg1" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#1B8FFF"/>
+              <stop offset="100%" stop-color="#0E5FE0"/>
+            </linearGradient>
+          </defs>
+          <rect width="32" height="32" rx="7" fill="url(#xg1)"/>
+          <path d="M8 22l5-6-5-6h3l3.5 4.5L18 10h3l-5 6 5 6h-3l-3.5-4.5L11 22H8z" fill="#fff"/>
+        </svg>
+        Xcode
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ ABOUT ══ -->
+<section id="about">
+  <div class="section-inner">
+    <div class="section-label">About Me</div>
+    <h2 class="section-title">The Developer</h2>
+
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <h3>One-Man Army Product Engineer</h3>
+        <p>
+          I'm a Flutter-first mobile engineer based in <strong>Mumbai, India</strong>, with deep expertise in building and shipping production-grade applications end to end — solo. From database schema design to App Store submission, I own the full stack.
+        </p>
+        <p>
+          My specialty is building <strong>complex business systems</strong>: Point of Sale platforms, logistics apps, financial tools, and hardware integrations with Bluetooth/thermal printers and embedded devices. I've taken apps from 0 to <strong>50K+ users</strong>.
+        </p>
+        <p>
+          I thrive in environments where I have ownership — where I can gather requirements, design the architecture, write every line of code, and watch it go live in the hands of real users. That complete loop energizes me.
+        </p>
+      </div>
+      <div class="reveal">
+        <div class="edu-card">
+          <div class="edu-degree">Bachelor of Engineering — Computer Engineering</div>
+          <div class="edu-school">Mumbai University · Nerul, Navi Mumbai</div>
+          <div class="edu-grade">CGPA: 8.5 / 10 · 79.67% · No Backlogs</div>
+          <div class="edu-year">2020 – 2023</div>
+        </div>
+        <div class="section-label" style="margin-bottom:0.8rem">Certifications</div>
+        <ul class="cert-list">
+          <li>Full Stack Web Development — Udemy (Node.js, PostgreSQL, React)</li>
+          <li>Android App Development — Great Learning (May 2021)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CONTACT ══ -->
+<section id="contact">
+  <div class="section-inner">
+    <div class="contact-inner">
+      <div class="contact-text reveal">
+        <div class="section-label" style="margin-bottom:1rem">Get In Touch</div>
+        <h3>Let's build something<br><span class="accent">remarkable.</span></h3>
+        <p style="margin-top:1.2rem">
+          Whether you need a mobile engineer who can own the full product lifecycle, or someone to scale your existing app — I'm open to new opportunities. Drop a message.
+        </p>
+      </div>
+      <div class="contact-links reveal">
+        <a href="mailto:rahulwaghmare751@gmail.com" class="contact-link">
+          <span class="contact-link-icon">✉</span>
+          <div class="contact-link-info">
+            <div class="contact-link-label">Email</div>
+            rahulwaghmare751@gmail.com
+          </div>
+        </a>
+        <a href="tel:8080263326" class="contact-link">
+          <span class="contact-link-icon">📱</span>
+          <div class="contact-link-info">
+            <div class="contact-link-label">Phone</div>
+            +91 8080263326
+          </div>
+        </a>
+        <a href="https://www.linkedin.com/in/rahul-waghmare-3a3217212" target="_blank" rel="noopener" class="contact-link">
+          <span class="contact-link-icon">💼</span>
+          <div class="contact-link-info">
+            <div class="contact-link-label">LinkedIn</div>
+            rahul-waghmare-3a3217212
+          </div>
+        </a>
+        <a href="https://github.com/snapper4" target="_blank" rel="noopener" class="contact-link">
+          <span class="contact-link-icon">⌥</span>
+          <div class="contact-link-info">
+            <div class="contact-link-label">GitHub</div>
+            github.com/snapper4
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="footer-brand">RAHUL WAGHMARE</div>
+  <div>© 2025 · Mumbai, India · Built with ♥</div>
+  <div>Mobile Engineer · Flutter · Android · Node.js</div>
+</footer>
+
+<script>
+// Custom cursor
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursorRing');
+let mx = 0, my = 0, rx = 0, ry = 0;
+
+document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+function animateCursor() {
+  cursor.style.left = mx + 'px';
+  cursor.style.top = my + 'px';
+  rx += (mx - rx) * 0.12;
+  ry += (my - ry) * 0.12;
+  ring.style.left = rx + 'px';
+  ring.style.top = ry + 'px';
+  requestAnimationFrame(animateCursor);
+}
+animateCursor();
+
+// Scroll reveal
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      entry.target.style.transitionDelay = (i % 4) * 0.08 + 's';
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1 });
+reveals.forEach(el => observer.observe(el));
+</script>
 </body>
 </html>
